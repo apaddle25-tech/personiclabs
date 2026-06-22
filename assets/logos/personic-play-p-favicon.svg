@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512" role="img" aria-label="Personic Labs logo">
+
+<defs>
+  <clipPath id="outer-favicon">
+    <path d="M256 40 C267 40 278 45 287 52 L443 165 C455 174 460 189 456 204 L394 419 C390 434 376 444 360 444 H152 C136 444 122 434 118 419 L56 204 C52 189 57 174 69 165 L225 52 C234 45 245 40 256 40 Z"/>
+  </clipPath>
+  <mask id="p-mask-favicon" maskUnits="userSpaceOnUse" x="0" y="0" width="512" height="512">
+    <rect width="512" height="512" fill="white"/>
+    <path d="M198 168 H252 C326 168 370 214 370 260 C370 304 333 336 282 336 H252 V444 H198 Z" fill="black"/>
+  </mask>
+  
+</defs>
+
+<g mask="url(#p-mask-favicon)">
+  <path d="M256 40 C267 40 278 45 287 52 L443 165 C455 174 460 189 456 204 L394 419 C390 434 376 444 360 444 H152 C136 444 122 434 118 419 L56 204 C52 189 57 174 69 165 L225 52 C234 45 245 40 256 40 Z" fill="#24114F"/>
+</g>
+<path d="M247 232 C247 224 256 220 263 225 L316 255 C323 259 323 268 316 272 L263 302 C256 307 247 303 247 294 Z" fill="#30CCFF"/>
+
+</svg>

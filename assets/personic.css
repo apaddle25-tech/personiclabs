@@ -4,10 +4,14 @@
    Display/Body: Axiforma · Utility labels: monospace
    Signature: spectral waveform + Acoustic Genome pentagon
    ============================================================ */
-@font-face{font-family:'Axiforma';src:url('assets/fonts/Axiforma-Book.woff2') format('woff2');font-weight:400;font-display:swap}
-@font-face{font-family:'Axiforma';src:url('assets/fonts/Axiforma-Medium.woff2') format('woff2');font-weight:500;font-display:swap}
-@font-face{font-family:'Axiforma';src:url('assets/fonts/Axiforma-SemiBold.woff2') format('woff2');font-weight:600;font-display:swap}
-@font-face{font-family:'Axiforma';src:url('assets/fonts/Axiforma-Bold.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'Axiforma';src:url('fonts/Axiforma-Book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:'Axiforma';src:url('fonts/Axiforma-Medium.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:'Axiforma';src:url('fonts/Axiforma-SemiBold.woff2') format('woff2');font-weight:600;font-display:swap}
+@font-face{font-family:'Axiforma';src:url('fonts/Axiforma-Bold.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:'Gilroy';src:url('fonts/Gilroy-Bold.ttf') format('truetype');font-weight:700;font-display:swap}
+@font-face{font-family:'Gilroy';src:url('fonts/Gilroy-Black.ttf') format('truetype');font-weight:900;font-display:swap}
+@font-face{font-family:'AvantGardeBkBT';src:url('fonts/AvantGardeBookBT.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:'AvantGardeBkBT';src:url('fonts/AvantGardeDemiBT.ttf') format('truetype');font-weight:700;font-display:swap}
 
 :root{
   --void:#08070F; --ink:#0B0913; --panel:#110E1C; --panel-2:#16121F;

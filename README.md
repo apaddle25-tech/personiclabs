@@ -7,12 +7,12 @@ dedicated **light** theme for the results report (for long-form readability).
 ## Design system — "Spectral"
 - Dark, atmospheric base with a fine grain and a spectral aurora drawn from the
   faceted "play-P" logo mark.
-- Five Acoustic Genome channels inside Soundtrack as the color language:
+- Five Acoustic Genome channels inside SoundTrack as the color language:
   Exploration (violet), Structure (blue), Activation (teal), Connection (rose),
   Sensitivity (amber) — used as wayfinding, sparingly.
 - Type: **Axiforma** (display/body) + a monospace utility face for lab-instrument
   labels. Editorial spacing, numbered process, contained CTA panels.
-- Signature motifs: live spectral equalizer, Soundtrack pentagon/radar,
+- Signature motifs: live spectral equalizer, SoundTrack pentagon/radar,
   OCEAN color dots, closing waveform.
 - Shared stylesheet: `assets/personic.css` (tokens + components for every page).
 
@@ -20,8 +20,8 @@ dedicated **light** theme for the results report (for long-form readability).
 Open `index-standalone.html` (or `index.html`). All pages share `assets/personic.css`.
 - `index-standalone.html` / `index.html` — flagship home (waitlist CTA)
 - `index-live-product-standalone.html` — home variant (CTA → live assessment)
-- `personic-soundtrack-standalone.html` — the core consumer product, Soundtrack: OCEAN radar, the five
-  Soundtrack Types, the 5-step experience, example report, color evolution, domains
+- `personic-soundtrack-standalone.html` — the core consumer product, SoundTrack: OCEAN radar, the five
+  SoundTrack Types, the 5-step experience, example report, color evolution, domains
 - `wavelength-how-it-works.html` — the science page: signal design + 8 musical building
   blocks + genome→archetype (legacy filename retained for routing)
 - `wavelength-standalone.html` — Wavelength, with the MBTI / DISC comparison table
@@ -29,10 +29,10 @@ Open `index-standalone.html` (or `index.html`). All pages share `assets/personic
 - `about-us-standalone.html` — founder story, research foundation, and Personic Labs mission
 
 ## Assessment (interactive, dark)
-- `personic-soundtrack-assessment.html` — the 15-step Soundtrack sound-first flow, refined onto the
+- `personic-soundtrack-assessment.html` — the 15-step SoundTrack sound-first flow, refined onto the
   Spectral system (mono eyebrows, pill buttons, refined fields, spectral flow bar,
   spectral pentagon on the processing step). Uses `assets/`.
-- `personic-acoustic-genome-assessment-export.html` — the same Soundtrack flow, **self-contained**
+- `personic-acoustic-genome-assessment-export.html` — the same SoundTrack flow, **self-contained**
   (all fonts/logos inlined; opens anywhere with no network).
 
 ## Results report (light)

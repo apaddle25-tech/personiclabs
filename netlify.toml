@@ -21,13 +21,13 @@
   status = 301
 
 [[redirects]]
-  from = "/soundtrack"
-  to = "/personic-soundtrack-standalone.html"
+  from = "/personic-soundtrack"
+  to = "/soundtrack"
   status = 301
 
 [[redirects]]
-  from = "/personic-soundtrack"
-  to = "/personic-soundtrack-standalone.html"
+  from = "/personic-soundtrack-standalone.html"
+  to = "/soundtrack"
   status = 301
 
 [[redirects]]
@@ -37,17 +37,27 @@
 
 [[redirects]]
   from = "/acoustic-genome"
-  to = "/personic-soundtrack-standalone.html"
+  to = "/soundtrack"
+  status = 301
+
+[[redirects]]
+  from = "/acoustic-genome-standalone.html"
+  to = "/soundtrack"
   status = 301
 
 [[redirects]]
   from = "/compass"
-  to = "/personic-soundtrack-standalone.html"
+  to = "/soundtrack"
   status = 301
 
 [[redirects]]
   from = "/personic-compass"
-  to = "/personic-soundtrack-standalone.html"
+  to = "/soundtrack"
+  status = 301
+
+[[redirects]]
+  from = "/personic-compass-standalone.html"
+  to = "/soundtrack"
   status = 301
 
 [[redirects]]
@@ -57,12 +67,17 @@
 
 [[redirects]]
   from = "/prism"
-  to = "/personic-soundtrack-standalone.html"
+  to = "/soundtrack"
   status = 301
 
 [[redirects]]
   from = "/personic-prism"
-  to = "/personic-soundtrack-standalone.html"
+  to = "/soundtrack"
+  status = 301
+
+[[redirects]]
+  from = "/personic-prism-standalone.html"
+  to = "/soundtrack"
   status = 301
 
 [[redirects]]
@@ -71,41 +86,51 @@
   status = 301
 
 [[redirects]]
-  from = "/how-it-works"
-  to = "/wavelength-how-it-works.html"
+  from = "/wavelength-how-it-works.html"
+  to = "/how-it-works"
   status = 301
 
 [[redirects]]
   from = "/wavelength"
-  to = "/wavelength-standalone.html"
-  status = 301
-
-[[redirects]]
-  from = "/teams"
-  to = "/wavelength-standalone.html"
+  to = "/teams"
   status = 301
 
 [[redirects]]
   from = "/work"
-  to = "/wavelength-standalone.html"
+  to = "/teams"
   status = 301
 
 [[redirects]]
   from = "/enterprise"
-  to = "/wavelength-standalone.html"
+  to = "/teams"
+  status = 301
+
+[[redirects]]
+  from = "/enterprise-standalone.html"
+  to = "/teams"
+  status = 301
+
+[[redirects]]
+  from = "/wavelength-standalone.html"
+  to = "/teams"
   status = 301
 
 [[redirects]]
   from = "/about"
-  to = "/about-us-standalone.html"
+  to = "/about-us"
   status = 301
 
 [[redirects]]
-  from = "/waitlist"
-  to = "/waitlist-standalone.html"
+  from = "/about-us-standalone.html"
+  to = "/about-us"
   status = 301
 
 [[redirects]]
   from = "/panel"
-  to = "/waitlist-standalone.html"
+  to = "/waitlist"
+  status = 301
+
+[[redirects]]
+  from = "/waitlist-standalone.html"
+  to = "/waitlist"
   status = 301

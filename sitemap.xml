@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://personiclabs.com/</loc></url>
-  <url><loc>https://personiclabs.com/personic-soundtrack-standalone.html</loc></url>
-  <url><loc>https://personiclabs.com/personic-soundtrack-assessment.html</loc></url>
-  <url><loc>https://personiclabs.com/wavelength-how-it-works.html</loc></url>
-  <url><loc>https://personiclabs.com/wavelength-standalone.html</loc></url>
-  <url><loc>https://personiclabs.com/about-us-standalone.html</loc></url>
-  <url><loc>https://personiclabs.com/waitlist-standalone.html</loc></url>
+  <url><loc>https://www.personiclabs.com/</loc></url>
+  <url><loc>https://www.personiclabs.com/soundtrack</loc></url>
+  <url><loc>https://www.personiclabs.com/how-it-works</loc></url>
+  <url><loc>https://www.personiclabs.com/teams</loc></url>
+  <url><loc>https://www.personiclabs.com/about-us</loc></url>
+  <url><loc>https://www.personiclabs.com/waitlist</loc></url>
 </urlset>

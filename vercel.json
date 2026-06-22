@@ -1,5 +1,5 @@
 {
-  "cleanUrls": false,
+  "cleanUrls": true,
   "trailingSlash": false,
   "headers": [
     {
@@ -41,13 +41,13 @@
       "permanent": true
     },
     {
-      "source": "/soundtrack",
-      "destination": "/personic-soundtrack-standalone.html",
+      "source": "/personic-soundtrack",
+      "destination": "/soundtrack",
       "permanent": true
     },
     {
-      "source": "/personic-soundtrack",
-      "destination": "/personic-soundtrack-standalone.html",
+      "source": "/personic-soundtrack-standalone.html",
+      "destination": "/soundtrack",
       "permanent": true
     },
     {
@@ -57,17 +57,27 @@
     },
     {
       "source": "/acoustic-genome",
-      "destination": "/personic-soundtrack-standalone.html",
+      "destination": "/soundtrack",
+      "permanent": true
+    },
+    {
+      "source": "/acoustic-genome-standalone.html",
+      "destination": "/soundtrack",
       "permanent": true
     },
     {
       "source": "/compass",
-      "destination": "/personic-soundtrack-standalone.html",
+      "destination": "/soundtrack",
       "permanent": true
     },
     {
       "source": "/personic-compass",
-      "destination": "/personic-soundtrack-standalone.html",
+      "destination": "/soundtrack",
+      "permanent": true
+    },
+    {
+      "source": "/personic-compass-standalone.html",
+      "destination": "/soundtrack",
       "permanent": true
     },
     {
@@ -77,12 +87,17 @@
     },
     {
       "source": "/prism",
-      "destination": "/personic-soundtrack-standalone.html",
+      "destination": "/soundtrack",
       "permanent": true
     },
     {
       "source": "/personic-prism",
-      "destination": "/personic-soundtrack-standalone.html",
+      "destination": "/soundtrack",
+      "permanent": true
+    },
+    {
+      "source": "/personic-prism-standalone.html",
+      "destination": "/soundtrack",
       "permanent": true
     },
     {
@@ -91,43 +106,53 @@
       "permanent": true
     },
     {
-      "source": "/how-it-works",
-      "destination": "/wavelength-how-it-works.html",
+      "source": "/wavelength-how-it-works.html",
+      "destination": "/how-it-works",
       "permanent": true
     },
     {
       "source": "/wavelength",
-      "destination": "/wavelength-standalone.html",
-      "permanent": true
-    },
-    {
-      "source": "/teams",
-      "destination": "/wavelength-standalone.html",
+      "destination": "/teams",
       "permanent": true
     },
     {
       "source": "/work",
-      "destination": "/wavelength-standalone.html",
+      "destination": "/teams",
       "permanent": true
     },
     {
       "source": "/enterprise",
-      "destination": "/wavelength-standalone.html",
+      "destination": "/teams",
+      "permanent": true
+    },
+    {
+      "source": "/enterprise-standalone.html",
+      "destination": "/teams",
+      "permanent": true
+    },
+    {
+      "source": "/wavelength-standalone.html",
+      "destination": "/teams",
       "permanent": true
     },
     {
       "source": "/about",
-      "destination": "/about-us-standalone.html",
+      "destination": "/about-us",
       "permanent": true
     },
     {
-      "source": "/waitlist",
-      "destination": "/waitlist-standalone.html",
+      "source": "/about-us-standalone.html",
+      "destination": "/about-us",
       "permanent": true
     },
     {
       "source": "/panel",
-      "destination": "/waitlist-standalone.html",
+      "destination": "/waitlist",
+      "permanent": true
+    },
+    {
+      "source": "/waitlist-standalone.html",
+      "destination": "/waitlist",
       "permanent": true
     }
   ]

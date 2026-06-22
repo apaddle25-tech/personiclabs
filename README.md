@@ -17,16 +17,24 @@ dedicated **light** theme for the results report (for long-form readability).
 - Shared stylesheet: `assets/personic.css` (tokens + components for every page).
 
 ## Website (multi-page, dark)
-Open `index-standalone.html` (or `index.html`). All pages share `assets/personic.css`.
-- `index-standalone.html` / `index.html` — flagship home (waitlist CTA)
-- `index-live-product-standalone.html` — home variant (CTA → live assessment)
-- `personic-soundtrack-standalone.html` — the core consumer product, SoundTrack: OCEAN radar, the five
+Open `index.html` for the production home page. All pages share `assets/personic.css`.
+- `/` — flagship home (waitlist CTA)
+- `/soundtrack` — the core consumer product, SoundTrack: OCEAN radar, the five
   SoundTrack Types, the 5-step experience, example report, color evolution, domains
-- `wavelength-how-it-works.html` — the science page: signal design + 8 musical building
-  blocks + genome→archetype (legacy filename retained for routing)
-- `wavelength-standalone.html` — Wavelength, with the MBTI / DISC comparison table
-- `waitlist-standalone.html` — waitlist with full intake form
-- `about-us-standalone.html` — founder story, research foundation, and Personic Labs mission
+- `/how-it-works` — the science page: signal design + 8 musical building
+  blocks + genome→archetype
+- `/teams` — Wavelength, with the MBTI / DISC comparison table
+- `/waitlist` — waitlist with full intake form
+- `/about-us` — founder story, research foundation, and Personic Labs mission
+
+Legacy HTML files remain in place for local preview and backward compatibility:
+- `index-standalone.html` / `index.html` — flagship home
+- `index-live-product-standalone.html` — home variant (CTA → live assessment)
+- `personic-soundtrack-standalone.html` — legacy SoundTrack page
+- `wavelength-how-it-works.html` — legacy science page
+- `wavelength-standalone.html` — legacy Wavelength page
+- `waitlist-standalone.html` — legacy waitlist page
+- `about-us-standalone.html` — legacy about page
 
 ## Assessment (interactive, dark)
 - `personic-soundtrack-assessment.html` — the 15-step SoundTrack sound-first flow, refined onto the

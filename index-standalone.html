@@ -7,12 +7,17 @@
 <meta name="description" content="Soundtrack turns quick reactions to selected sound clips into a premium personal intelligence report powered by the Acoustic Genome model.">
 <link rel="icon" type="image/svg+xml" href="assets/logos/personic-play-p-favicon.svg">
 <link rel="stylesheet" href="assets/personic.css?v=titlecase-brand-2">
+<script>
+if (location.pathname.endsWith('/index-standalone.html')) {
+  history.replaceState(null, '', '/' + location.search + location.hash);
+}
+</script>
 </head>
 <body>
 
 <nav class="nav">
   <div class="wrap nav-in">
-    <a class="brand" href="index-standalone.html"><img class="mk" src="assets/logos/personic-play-p-mark-gradient.svg" alt="">Personic Labs</a>
+    <a class="brand" href="/"><img class="mk" src="assets/logos/personic-play-p-mark-gradient.svg" alt="">Personic Labs</a>
     <ul class="nav-links">
       <li><a href="personic-soundtrack-standalone.html">Soundtrack</a></li>
       <li><a href="wavelength-how-it-works.html">How It Works</a></li>
@@ -232,7 +237,7 @@
   <div class="wrap">
     <div class="foot-top">
       <div>
-        <a class="brand" href="index-standalone.html" style="margin-bottom:16px"><img class="mk" src="assets/logos/personic-play-p-mark-gradient.svg" alt="">Personic Labs</a>
+        <a class="brand" href="/" style="margin-bottom:16px"><img class="mk" src="assets/logos/personic-play-p-mark-gradient.svg" alt="">Personic Labs</a>
         <p style="color:var(--muted);font-size:.92rem;max-width:30ch">Turning quick reactions to sound into a clearer roadmap for who you are becoming.</p>
       </div>
       <div class="foot-links"><a href="personic-soundtrack-standalone.html">Soundtrack</a><a href="wavelength-how-it-works.html">How It Works</a><a href="wavelength-standalone.html">For Teams</a></div>

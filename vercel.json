@@ -1,0 +1,134 @@
+{
+  "cleanUrls": false,
+  "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/assessment",
+      "destination": "/personic-soundtrack-assessment.html",
+      "permanent": true
+    },
+    {
+      "source": "/report",
+      "destination": "/personic-results-report-export.html",
+      "permanent": true
+    },
+    {
+      "source": "/soundtrack",
+      "destination": "/personic-soundtrack-standalone.html",
+      "permanent": true
+    },
+    {
+      "source": "/personic-soundtrack",
+      "destination": "/personic-soundtrack-standalone.html",
+      "permanent": true
+    },
+    {
+      "source": "/soundtrack-assessment",
+      "destination": "/personic-soundtrack-assessment.html",
+      "permanent": true
+    },
+    {
+      "source": "/acoustic-genome",
+      "destination": "/personic-soundtrack-standalone.html",
+      "permanent": true
+    },
+    {
+      "source": "/compass",
+      "destination": "/personic-soundtrack-standalone.html",
+      "permanent": true
+    },
+    {
+      "source": "/personic-compass",
+      "destination": "/personic-soundtrack-standalone.html",
+      "permanent": true
+    },
+    {
+      "source": "/compass-assessment",
+      "destination": "/personic-soundtrack-assessment.html",
+      "permanent": true
+    },
+    {
+      "source": "/prism",
+      "destination": "/personic-soundtrack-standalone.html",
+      "permanent": true
+    },
+    {
+      "source": "/personic-prism",
+      "destination": "/personic-soundtrack-standalone.html",
+      "permanent": true
+    },
+    {
+      "source": "/prism-assessment",
+      "destination": "/personic-soundtrack-assessment.html",
+      "permanent": true
+    },
+    {
+      "source": "/how-it-works",
+      "destination": "/wavelength-how-it-works.html",
+      "permanent": true
+    },
+    {
+      "source": "/wavelength",
+      "destination": "/wavelength-standalone.html",
+      "permanent": true
+    },
+    {
+      "source": "/teams",
+      "destination": "/wavelength-standalone.html",
+      "permanent": true
+    },
+    {
+      "source": "/work",
+      "destination": "/wavelength-standalone.html",
+      "permanent": true
+    },
+    {
+      "source": "/enterprise",
+      "destination": "/wavelength-standalone.html",
+      "permanent": true
+    },
+    {
+      "source": "/about",
+      "destination": "/about-us-standalone.html",
+      "permanent": true
+    },
+    {
+      "source": "/waitlist",
+      "destination": "/waitlist-standalone.html",
+      "permanent": true
+    },
+    {
+      "source": "/panel",
+      "destination": "/waitlist-standalone.html",
+      "permanent": true
+    }
+  ]
+}

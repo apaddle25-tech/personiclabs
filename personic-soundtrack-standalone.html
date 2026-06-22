@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Soundtrack · Personic Labs</title>
+<meta name="description" content="Soundtrack is a personal intelligence report powered by your Acoustic Genome, goals, life areas, and optional listening history.">
+<link rel="icon" type="image/svg+xml" href="assets/logos/personic-play-p-favicon.svg">
+<link rel="stylesheet" href="assets/personic.css?v=titlecase-brand-2">
+<style>
+.ag-head{display:flex;flex-direction:column;align-items:center;gap:3px;margin-bottom:8px}
+.ag-head .kicker{text-align:center}
+.ag-name{font-size:1.6rem;letter-spacing:-.02em;line-height:1.05}
+.ag-arch{font-weight:700;font-size:1.22rem;margin-top:10px}
+.ag-name,.ag-arch{transition:opacity .35s var(--ease,ease),transform .35s var(--ease,ease)}
+.ag-name.swap,.ag-arch.swap{opacity:0;transform:translateY(5px)}
+.ocean-key{color:var(--muted);font-size:.84rem;line-height:1.8;margin-top:14px}
+.ocean-key b{font-weight:800}
+/* color evolution */
+.evo-row{display:grid;grid-template-columns:165px 1fr 86px;gap:16px;align-items:center;padding:13px 0;border-top:1px solid var(--line)}
+@media(max-width:560px){.evo-row{grid-template-columns:120px 1fr 64px;gap:10px}}
+.evo-name{display:flex;align-items:center;gap:10px;font-weight:600;font-size:.96rem}
+.evo-name i{width:13px;height:13px;border-radius:50%;box-shadow:0 0 12px -2px var(--c);flex:none}
+.evo-track{position:relative;height:11px;border-radius:99px;background:rgba(255,255,255,.06)}
+.evo-now{position:absolute;left:0;top:0;bottom:0;border-radius:99px;background:var(--c);width:var(--solid);opacity:.9;box-shadow:0 0 14px -3px var(--c)}
+.evo-grow{position:absolute;top:0;bottom:0;left:var(--solid);width:var(--dash);border-radius:99px;
+  background:repeating-linear-gradient(90deg,color-mix(in srgb,var(--c) 80%,transparent) 0 6px,color-mix(in srgb,var(--c) 16%,transparent) 6px 12px)}
+.evo-mark{position:absolute;top:-4px;left:var(--goal);width:2px;height:19px;background:#fff;border-radius:2px;transform:translateX(-1px);box-shadow:0 0 9px var(--c)}
+.evo-delta{font-family:var(--mono);font-size:.78rem;color:var(--muted);text-align:right;letter-spacing:.02em}
+.evo-legend{display:flex;gap:16px;font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+.evo-legend span{display:inline-flex;align-items:center;gap:6px}
+.evo-legend i{width:16px;height:8px;border-radius:3px;display:inline-block}
+.evo-legend .ls-solid{background:#9D8BFF}
+.evo-legend .ls-dash{background:repeating-linear-gradient(90deg,#9D8BFF 0 4px,transparent 4px 8px)}
+.evo-legend .ls-mark{width:2px;height:14px;border-radius:2px;background:#fff}
+@keyframes evNow{from{width:0}to{width:var(--solid)}}
+@keyframes evGrow{from{width:0}to{width:var(--dash)}}
+@keyframes evMark{from{left:var(--now)}to{left:var(--goal)}}
+.panel.in .evo-now{animation:evNow 1s var(--ease,ease) var(--d) both}
+.panel.in .evo-grow{width:0;animation:evGrow 1.05s var(--ease,ease) calc(var(--d) + .45s) both}
+.panel.in .evo-mark{animation:evMark 1.5s cubic-bezier(.2,.8,.2,1) var(--d) both}
+@media(prefers-reduced-motion:reduce){.panel.in .evo-now{width:var(--solid);animation:none}.panel.in .evo-grow{width:var(--dash);animation:none}.panel.in .evo-mark{left:var(--goal);animation:none}}
+</style>
+
+</head>
+<body>
+<nav class="nav"><div class="wrap nav-in">
+<a class="brand" href="index-standalone.html"><img class="mk" src="assets/logos/personic-play-p-mark-gradient.svg" alt="">Personic Labs</a>
+<ul class="nav-links"><li><a href="personic-soundtrack-standalone.html" style="color:var(--text)">Soundtrack</a></li><li><a href="wavelength-how-it-works.html">How It Works</a></li><li><a href="wavelength-standalone.html">For Teams</a></li><li><a href="about-us-standalone.html">About Us</a></li></ul>
+<div class="nav-right"><a href="waitlist-standalone.html" class="btn btn-primary">Join the Waitlist</a>
+<button class="burger" id="burger" aria-label="Open menu"><span></span><span></span><span></span></button></div>
+</div></nav>
+<div class="mob" id="mob"><a href="personic-soundtrack-standalone.html">Soundtrack</a><a href="wavelength-how-it-works.html">How It Works</a><a href="wavelength-standalone.html">For Teams</a><a href="about-us-standalone.html">About Us</a><a href="waitlist-standalone.html">Join the Waitlist</a></div>
+
+<header class="ihero"><div class="wrap ihero-grid">
+<div class="reveal">
+<p class="eyebrow">Soundtrack</p>
+<h1 style="margin-top:16px">Most personality tests hand you a label. <span class="spectral-text">We give you a soundtrack for growth.</span></h1>
+<p class="lede">Soundtrack turns your reactions to sound into a personal roadmap for how you connect, focus, recover, and grow. Your Acoustic Genome powers the map. Your Soundtrack Type makes the pattern easy to understand. Your goals shape what comes next.</p>
+<div class="hero-cta"><a href="waitlist-standalone.html" class="btn btn-primary btn-lg">Join the Wait List <span class="arrow">&rarr;</span></a><a href="wavelength-how-it-works.html" class="btn btn-ghost btn-lg">How it works</a></div>
+<p class="tech-line" style="margin-top:24px"><span class="pp"></span>Discovery first. Development second. · Patent pending</p>
+</div>
+<div class="signal reveal-x" style="--x:34px">
+<div class="portrait">
+<img src="assets/img/personic-hero-listener-purple.webp" alt="A person listening with headphones, immersed in music" style="object-position:82% center;transform:scale(1.06);transform-origin:82% center">
+</div>
+<div class="readout">
+<div class="rlab">Soundtrack</div>
+<div class="rval">A personal intelligence report, delivered through sound to help improve your life.</div>
+<div class="sigdots" aria-hidden="true">
+<span><i style="background:#7B4CFF"></i>O</span>
+<span><i style="background:#30CCFF"></i>C</span>
+<span><i style="background:#54E6C0"></i>E</span>
+<span><i style="background:#FFC34D"></i>A</span>
+<span><i style="background:#FF3D9A"></i>N</span>
+</div>
+</div>
+</div>
+</div></header>
+
+<section class="sec" style="padding-top:clamp(40px,5vw,64px)"><div class="wrap">
+<div class="sec-head reveal"><p class="eyebrow">Soundtrack Types</p><h2>Five clear patterns for understanding your results.</h2><p>Your Acoustic Genome is the sound-based profile. Your Soundtrack Type is the plain-language pattern that helps you understand how you focus, connect, recharge, and grow.</p></div>
+<div class="arche">
+<article class="arche-card reveal" style="--c:#FFC34D;--d:0ms"><div class="swatch" style="background:#FFC34D"></div><h4>Resonant Connector</h4><p class="tag">connection-led</p></article><article class="arche-card reveal" style="--c:#7B4CFF;--d:70ms"><div class="swatch" style="background:#7B4CFF"></div><h4>Reflective Explorer</h4><p class="tag">novelty-led</p></article><article class="arche-card reveal" style="--c:#FF3D9A;--d:140ms"><div class="swatch" style="background:#FF3D9A"></div><h4>Kinetic Catalyst</h4><p class="tag">energy-led</p></article><article class="arche-card reveal" style="--c:#30CCFF;--d:210ms"><div class="swatch" style="background:#30CCFF"></div><h4>Grounded Architect</h4><p class="tag">structure-led</p></article><article class="arche-card reveal" style="--c:#54E6C0;--d:280ms"><div class="swatch" style="background:#54E6C0"></div><h4>Luminous Strategist</h4><p class="tag">clarity-led</p></article>
+</div>
+</div></section>
+
+<div class="wrap"><div class="sec-rule"></div></div>
+
+<section class="sec" id="flow"><div class="wrap">
+<div class="sec-head reveal"><p class="eyebrow">The experience</p><h2>From a reaction to a roadmap.</h2><p>Five steps turn an instinctive response to sound into a personal roadmap you can actually use.</p></div>
+<div class="grid" style="margin-top:48px;gap:16px">
+<div class="panel reveal" style="--d:0ms;display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:start">
+<div style="font-family:var(--mono);font-size:.8rem;color:var(--faint);white-space:nowrap;padding-top:4px">Step 01</div>
+<div><h3 style="font-size:1.2rem">Listen and respond</h3><p style="color:var(--muted);margin-top:8px;line-height:1.6">React to selected musical examples, then add a concise personality and lifestyle context layer so your signal can become useful guidance. You can also add listening history later to make the recommendations more specific to how you already use sound.</p></div></div><div class="panel reveal" style="--d:70ms;display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:start">
+<div style="font-family:var(--mono);font-size:.8rem;color:var(--faint);white-space:nowrap;padding-top:4px">Step 02</div>
+<div><h3 style="font-size:1.2rem">Receive your Acoustic Genome profile</h3><p style="color:var(--muted);margin-top:8px;line-height:1.6">Each OCEAN trait gets a color family. Higher percentiles deepen that hue, creating the palette signature behind your Soundtrack Type.</p></div></div><div class="panel reveal" style="--d:140ms;display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:start">
+<div style="font-family:var(--mono);font-size:.8rem;color:var(--faint);white-space:nowrap;padding-top:4px">Step 03</div>
+<div><h3 style="font-size:1.2rem">Select your growth goals</h3><p style="color:var(--muted);margin-top:8px;line-height:1.6">You choose the outcomes you care about. Personic compares your current profile with the Growth Direction suggested by those goals, then turns the distance into practical guidance.</p></div></div><div class="panel reveal" style="--d:210ms;display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:start">
+<div style="font-family:var(--mono);font-size:.8rem;color:var(--faint);white-space:nowrap;padding-top:4px">Step 04</div>
+<div><h3 style="font-size:1.2rem">Guidance and feedback</h3><p style="color:var(--muted);margin-top:8px;line-height:1.6">Turn your Growth Direction into action with tools, insights, and continuous feedback across music, relationships, work, dating, and health. When listening history is added, the engine can see your real focus, energy, recovery, and social sound patterns.</p></div></div><div class="panel reveal" style="--d:280ms;display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:start">
+<div style="font-family:var(--mono);font-size:.8rem;color:var(--faint);white-space:nowrap;padding-top:4px">Step 05</div>
+<div><h3 style="font-size:1.2rem">Your personal roadmap</h3><p style="color:var(--muted);margin-top:8px;line-height:1.6">Start with the reveal, then use your selected goals to shape a growth plan and domain-specific recommendations.</p></div></div>
+</div>
+</div></section>
+
+<div class="wrap"><div class="sec-rule"></div></div>
+
+<section class="sec"><div class="wrap">
+<div class="sec-head reveal"><p class="eyebrow">Listening history layer</p><h2>Your assessment starts the map. Your real listening habits sharpen it.</h2><p>Soundtrack works on its own. If you connect Spotify or upload listening history when it is available, Personic can add evidence from the music you actually return to, skip, repeat, and use throughout your day.</p></div>
+<div class="grid g-3 reveal" style="margin-top:40px">
+<div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#30CCFF" stroke-width="2"><path d="M9 18V5l10-2v13" stroke-linecap="round"/><circle cx="6" cy="18" r="3"/><circle cx="16" cy="16" r="3"/></svg></div><h3>Optional, not required</h3><p>Your standard report comes from the Soundtrack assessment, your goals, and your Acoustic Genome. Listening history is optional and can be added later when you want a sharper sound map.</p></div>
+<div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#7B4CFF" stroke-width="2"><path d="M4 19V5"/><path d="M4 19h16"/><path d="M8 15l3-4 3 2 5-7" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Real-life signal</h3><p>Spotify history can reveal listening arcs like focus music, novelty seeking, replay loops, mood regulation, workout energy, evening recovery, and social listening patterns.</p></div>
+<div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#54E6C0" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M4.9 4.9l2.8 2.8M16.3 16.3l2.8 2.8M19.1 4.9l-2.8 2.8M7.7 16.3l-2.8 2.8" stroke-linecap="round"/></svg></div><h3>Sharper recommendations</h3><p>That layer strengthens Music first, then informs work focus rituals, health and recovery cues, date environments, social connection, and community matches.</p></div>
+</div>
+<div class="panel reveal" style="--d:120ms;margin-top:22px;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px">
+<div><p class="kicker">No history yet</p><p style="color:var(--muted);font-size:.92rem;margin-top:6px">Use the assessment-only report. Add listening data later from your dashboard.</p></div>
+<div><p class="kicker">Manual bridge</p><p style="color:var(--muted);font-size:.92rem;margin-top:6px">Request your Spotify export, then upload it when it arrives to unlock deeper patterns.</p></div>
+<div><p class="kicker">Future connect</p><p style="color:var(--muted);font-size:.92rem;margin-top:6px">Once API support is live, connect top artists, genres, and listening energy more directly.</p></div>
+</div>
+</div></section>
+
+<div class="wrap"><div class="sec-rule"></div></div>
+
+<section class="sec"><div class="wrap">
+<div class="sec-head reveal"><p class="eyebrow">Your report · example</p><h2>Soundtrack becomes your personal roadmap.</h2><p>The reveal shows your Acoustic Genome palette, OCEAN chart, and Soundtrack Type. The premium roadmap adds your selected goals, Growth Direction, and tailored guidance across every domain.</p></div>
+<div class="grid g-2 reveal" style="margin-top:40px;align-items:start">
+<div class="panel">
+<p class="kicker">Your Soundtrack Type · example</p>
+<h3 class="spectral-text" style="font-size:1.7rem;margin-top:6px">Reflective Explorer</h3>
+<div class="grid g-2" style="margin-top:18px;gap:12px">
+<div><p class="kicker">Primary signal</p><p style="font-weight:600">Novelty</p></div>
+<div><p class="kicker">Growth edge</p><p style="font-weight:600">Direction</p></div></div>
+<p style="color:var(--muted);margin-top:18px;line-height:1.6">Curious, creative, and emotionally perceptive. You're energized by novelty and possibility, but your next level comes from turning insight into a direction you can actually live.</p>
+<p class="flabel">Your growth themes</p>
+<div class="chips"><span class="chip on" style="cursor:default">Achievement</span><span class="chip on" style="cursor:default">Discipline</span><span class="chip on" style="cursor:default">Leadership</span><span class="chip on" style="cursor:default">Follow-through</span></div>
+</div>
+<div class="grid" style="gap:12px">
+<div class="card" style="padding:18px"><h4>Music</h4><p>Progressive, instrumental focus sets to convert restlessness into deep work.</p></div><div class="card" style="padding:18px"><h4>Relationships</h4><p>Partners who anchor your momentum without dimming your spark.</p></div><div class="card" style="padding:18px"><h4>Work</h4><p>Systems that protect focus so your best ideas actually ship.</p></div><div class="card" style="padding:18px"><h4>Health</h4><p>Varied, goal-based training and recovery rhythms that keep novelty high and burnout low.</p></div>
+</div>
+</div>
+</div></section>
+
+<div class="wrap"><div class="sec-rule"></div></div>
+
+<section class="sec"><div class="wrap">
+<div class="sec-head reveal"><p class="eyebrow">Color evolution</p><h2>Your current pattern becomes your growth path.</h2><p>Each OCEAN trait owns a color family; your percentile makes it brighter or deeper. Select goals, and Personic derives a Growth Direction, shows what changes from now to next, then translates it into recommendations.</p></div>
+<div class="panel reveal" style="margin-top:36px">
+<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:6px"><p class="kicker">Now &rarr; Goal &middot; Luminous Strategist</p><span class="evo-legend"><span><i class="ls-solid"></i>Now</span><span><i class="ls-dash"></i>Path to goal</span><span><i class="ls-mark"></i>Goal</span></span></div><div class="evo-row" style="--c:#7B4CFF;--now:72%;--goal:84%;--solid:72%;--dash:12%;--dop:0.62;--d:0ms"><div class="evo-name"><i style="background:#7B4CFF"></i>Openness</div><div class="evo-track"><div class="evo-now"></div><div class="evo-grow"></div><div class="evo-mark"></div></div><div class="evo-delta">72 &rarr; 84</div></div><div class="evo-row" style="--c:#30CCFF;--now:50%;--goal:82%;--solid:50%;--dash:32%;--dop:0.62;--d:120ms"><div class="evo-name"><i style="background:#30CCFF"></i>Conscientiousness</div><div class="evo-track"><div class="evo-now"></div><div class="evo-grow"></div><div class="evo-mark"></div></div><div class="evo-delta">50 &rarr; 82</div></div><div class="evo-row" style="--c:#54E6C0;--now:60%;--goal:66%;--solid:60%;--dash:6%;--dop:0.62;--d:240ms"><div class="evo-name"><i style="background:#54E6C0"></i>Extraversion</div><div class="evo-track"><div class="evo-now"></div><div class="evo-grow"></div><div class="evo-mark"></div></div><div class="evo-delta">60 &rarr; 66</div></div><div class="evo-row" style="--c:#FFC34D;--now:70%;--goal:68%;--solid:68%;--dash:2%;--dop:0.32;--d:360ms"><div class="evo-name"><i style="background:#FFC34D"></i>Agreeableness</div><div class="evo-track"><div class="evo-now"></div><div class="evo-grow"></div><div class="evo-mark"></div></div><div class="evo-delta">70 &rarr; 68</div></div><div class="evo-row" style="--c:#FF3D9A;--now:48%;--goal:30%;--solid:30%;--dash:18%;--dop:0.32;--d:480ms"><div class="evo-name"><i style="background:#FF3D9A"></i>Neuroticism</div><div class="evo-track"><div class="evo-now"></div><div class="evo-grow"></div><div class="evo-mark"></div></div><div class="evo-delta">48 &rarr; 30</div></div><p style="color:var(--muted);font-size:.86rem;margin-top:16px">The solid bar is where you are now. The dashed run shows the shift toward your goal, and the marker is the target. Listening prescriptions, communication guidance, and recovery routines become the practical levers.</p>
+</div>
+</div></section>
+
+<div class="wrap"><div class="sec-rule"></div></div>
+
+<section class="sec"><div class="wrap">
+<div class="sec-head reveal"><p class="eyebrow">Domains</p><h2>One genome, guidance across your whole life.</h2><p>Inside your report, your profile and chosen priorities translate into specific guidance across:</p></div>
+<div class="grid g-5 reveal" style="margin-top:40px">
+<div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#30CCFF" stroke-width="2"><path d="M9 18V5l10-2v13" stroke-linecap="round"/><circle cx="6" cy="18" r="3"/><circle cx="16" cy="16" r="3"/></svg></div><h4>Music</h4><p>Focus, workout, sleep, confidence, social, recovery, and creative-flow sets tuned to your profile and goals.</p></div><div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#FFC34D" stroke-width="2"><circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M3 19c1-4 3.5-5 5-5M21 19c-1-4-3.5-5-5-5" stroke-linecap="round"/></svg></div><h4>Relationships</h4><p>Communication style, reassurance needs, conflict patterns, and compatibility cues.</p></div><div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#FF3D9A" stroke-width="2"><path d="M20 8.5a4.5 4.5 0 0 0-8-2.8A4.5 4.5 0 0 0 4 8.5c0 4 8 9.5 8 9.5s8-5.5 8-9.5Z" stroke-linejoin="round"/></svg></div><h4>Dating</h4><p>Date environments, pacing, conversation depth, and match traits that fit your profile.</p></div><div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#7B4CFF" stroke-width="2"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></div><h4>Work</h4><p>Systems and rituals that protect focus so your best ideas actually ship.</p></div><div class="card"><div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="#54E6C0" stroke-width="2"><path d="M3 12h4l2-5 4 10 2-5h6" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h4>Health</h4><p>Movement, recovery, and routines tuned to keep novelty high and burnout low.</p></div>
+</div>
+</div></section>
+
+<section class="sec" style="padding-top:0"><div class="wrap"><div class="cta reveal">
+<p class="eyebrow center" style="justify-content:center;color:var(--mint)">Coming soon</p>
+<h2 style="margin-top:18px">See your full color distribution and roadmap.</h2>
+<p class="lede">Your Growth Direction, growth themes, and personal guidance across all five domains, all in one report.</p>
+<div class="hero-cta"><a href="waitlist-standalone.html" class="btn btn-primary btn-lg">Join the Wait List <span class="arrow">&rarr;</span></a></div>
+</div></div></section>
+
+<footer><div class="wrap">
+<div class="foot-top">
+<div><a class="brand" href="index-standalone.html" style="margin-bottom:16px"><img class="mk" src="assets/logos/personic-play-p-mark-gradient.svg" alt="">Personic Labs</a>
+<p style="color:var(--muted);font-size:.92rem;max-width:30ch">Turning quick reactions to sound into a clearer roadmap for who you are becoming.</p></div>
+<div class="foot-links"><a href="personic-soundtrack-standalone.html">Soundtrack</a><a href="wavelength-how-it-works.html">How It Works</a><a href="wavelength-standalone.html">For Teams</a></div>
+<div class="foot-links"><a href="about-us-standalone.html">About Us</a><a href="index-standalone.html#research">Research</a><a href="waitlist-standalone.html">Waitlist</a></div>
+<div><p class="news-lab">Sign up for news and updates</p>
+<div class="news"><input type="email" placeholder="Email address" aria-label="Email address"><button aria-label="Subscribe">&rarr;</button></div>
+<div class="social">
+<a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+<a href="#" aria-label="X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h3l-7 8 8 12h-6l-5-7-5 7H2l8-9L2 2h6l4 6 6-6Z"/></svg></a>
+<a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 12s0-3.2-.4-4.7a2.5 2.5 0 0 0-1.7-1.7C19.4 5.2 12 5.2 12 5.2s-7.4 0-8.9.4A2.5 2.5 0 0 0 1.4 7.3 26 26 0 0 0 1 12c0 1.6 0 3.2.4 4.7a2.5 2.5 0 0 0 1.7 1.7c1.5.4 8.9.4 8.9.4s7.4 0 8.9-.4a2.5 2.5 0 0 0 1.7-1.7c.4-1.5.4-4.7.4-4.7Zm-13 3V9l5 3-5 3Z"/></svg></a>
+</div></div>
+</div>
+<div class="legal"><p>Personic Labs, Inc. is a Delaware corporation. Soundtrack is a consumer self-insight and personal-growth product powered by the Acoustic Genome model. It is not a medical or mental-health assessment and does not diagnose, treat, or screen for any condition.</p>
+<div class="crisis">If you, or someone you know, is in crisis, call 911 or go to the nearest emergency room. In the US you can also call or text 988. You are never alone.</div></div>
+<div class="copyright"><div style="display:flex;gap:18px"><a href="#">Terms</a><a href="#">Privacy</a></div><span>©2026 Personic Labs, Inc. All rights reserved.</span></div>
+</div></footer>
+<script>
+(function(){var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+var b=document.getElementById('burger'),m=document.getElementById('mob');
+if(b)b.addEventListener('click',function(){m.classList.toggle('open')});
+document.querySelectorAll('.mob a').forEach(function(a){a.addEventListener('click',function(){m.classList.remove('open')})});
+var els=document.querySelectorAll('.reveal,.reveal-x');
+if(reduce){els.forEach(function(e){e.classList.add('in')})}
+else{var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.14,rootMargin:'0px 0px -8% 0px'});els.forEach(function(e){io.observe(e)})}
+document.querySelectorAll('.chip').forEach(function(c){c.addEventListener('click',function(){c.classList.toggle('on')})});
+})();
+</script>
+<script>
+(function(){
+ var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+ var svg=document.getElementById('agRadar'); if(!svg) return;
+ var NS='http://www.w3.org/2000/svg';
+ var cx=130,cy=126,R=92, labels=['O','C','E','A','N'], cols=['#7B4CFF','#30CCFF','#54E6C0','#FFC34D','#FF3D9A'];
+ var profiles=[
+   {name:'Maya',  arch:'Reflective Explorer', v:[92,55,62,74,40]},
+   {name:'Daniel',arch:'Grounded Architect',  v:[50,90,52,66,36]},
+   {name:'Sofia', arch:'Resonant Connector',  v:[60,58,68,92,44]},
+   {name:'Theo',  arch:'Kinetic Catalyst',    v:[66,52,92,58,54]},
+   {name:'Aria',  arch:'Luminous Strategist', v:[74,80,60,56,30]}
+ ];
+ function ang(i){return -Math.PI/2 + i*2*Math.PI/5;}
+ function pt(i,r){return [cx+R*r*Math.cos(ang(i)), cy+R*r*Math.sin(ang(i))];}
+ function mk(t,a){var e=document.createElementNS(NS,t);for(var k in a)e.setAttribute(k,a[k]);return e;}
+ // defs: weighted radial fill (dominant trait color)
+ var defs=mk('defs'); 
+ var grad=mk('radialGradient',{id:'agFill',cx:'50%',cy:'50%',r:'62%'});
+ var s0=mk('stop',{offset:'0%'}),s1=mk('stop',{offset:'55%'}),s2=mk('stop',{offset:'100%'});
+ grad.appendChild(s0);grad.appendChild(s1);grad.appendChild(s2);defs.appendChild(grad);svg.appendChild(defs);
+ // static rings + spokes
+ [0.4,0.7,1.0].forEach(function(rr){var p=[];for(var i=0;i<5;i++){var q=pt(i,rr);p.push(q[0].toFixed(0)+','+q[1].toFixed(0));}svg.appendChild(mk('polygon',{points:p.join(' '),fill:'none',stroke:'rgba(255,255,255,.10)','stroke-width':'1'}));});
+ for(var i=0;i<5;i++){var q=pt(i,1);svg.appendChild(mk('line',{x1:cx,y1:cy,x2:q[0].toFixed(0),y2:q[1].toFixed(0),stroke:'rgba(255,255,255,.08)'}));}
+ // labels
+ for(var i=0;i<5;i++){var q=pt(i,1.2);var tx=mk('text',{x:q[0].toFixed(0),y:q[1].toFixed(0),fill:cols[i],'font-size':'13','font-weight':'700','text-anchor':'middle','dominant-baseline':'middle','font-family':'Axiforma,sans-serif'});tx.textContent=labels[i];svg.appendChild(tx);}
+ // value polygon + dots
+ var poly=mk('polygon',{points:'',fill:'url(#agFill)',stroke:'#fff','stroke-opacity':'.55','stroke-width':'1.5'});
+ svg.appendChild(poly);
+ var dots=[];for(var i=0;i<5;i++){var d=mk('circle',{r:'3.6',fill:cols[i]});svg.appendChild(d);dots.push(d);}
+ var nameEl=document.getElementById('agName'),archEl=document.getElementById('agArch');
+ function render(vals){
+   var pts=[];for(var i=0;i<5;i++){var r=Math.max(.08,vals[i]/100);var q=pt(i,r);pts.push(q[0].toFixed(1)+','+q[1].toFixed(1));dots[i].setAttribute('cx',q[0].toFixed(1));dots[i].setAttribute('cy',q[1].toFixed(1));}
+   poly.setAttribute('points',pts.join(' '));
+   // dominant color drives the fill
+   var mi=0;for(var i=1;i<5;i++)if(vals[i]>vals[mi])mi=i;var dc=cols[mi];
+   s0.setAttribute('stop-color',dc);s0.setAttribute('stop-opacity','.62');
+   s1.setAttribute('stop-color',dc);s1.setAttribute('stop-opacity','.26');
+   s2.setAttribute('stop-color',dc);s2.setAttribute('stop-opacity','.05');
+ }
+ var cur=profiles[0].v.slice(); render(cur);
+ if(reduce) return;
+ var idx=0;
+ function go(next){
+   var from=cur.slice(),to=profiles[next].v,t0=performance.now(),dur=900;
+   nameEl.classList.add('swap');archEl.classList.add('swap');
+   setTimeout(function(){nameEl.textContent=profiles[next].name;archEl.textContent=profiles[next].arch;nameEl.classList.remove('swap');archEl.classList.remove('swap');},330);
+   function step(now){var p=Math.min(1,(now-t0)/dur);var e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;
+     for(var i=0;i<5;i++)cur[i]=from[i]+(to[i]-from[i])*e; render(cur);
+     if(p<1)requestAnimationFrame(step);}
+   requestAnimationFrame(step);
+ }
+ setInterval(function(){idx=(idx+1)%profiles.length;go(idx);},4000);
+})();
+</script>
+</body>
+</html>

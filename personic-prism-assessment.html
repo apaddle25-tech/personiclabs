@@ -1,0 +1,1460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Soundtrack Assessment · Personic Labs</title>
+<meta name="description" content="A Soundtrack assessment experience that turns selected sound examples into an Acoustic Genome profile and post-assessment goal path.">
+<style>
+@font-face{font-family:Axiforma;src:url('assets/fonts/Axiforma-Book.woff2') format('woff2');font-weight:400;font-display:swap}
+@font-face{font-family:Axiforma;src:url('assets/fonts/Axiforma-SemiBold.woff2') format('woff2');font-weight:650;font-display:swap}
+@font-face{font-family:Axiforma;src:url('assets/fonts/Axiforma-ExtraBold.woff2') format('woff2');font-weight:800;font-display:swap}
+@font-face{font-family:Gilroy;src:url('assets/fonts/Gilroy-Bold.ttf') format('truetype');font-weight:700;font-display:swap}
+@font-face{font-family:Gilroy;src:url('assets/fonts/Gilroy-Black.ttf') format('truetype');font-weight:900;font-display:swap}
+@font-face{font-family:AvantGardeBkBT;src:url('assets/fonts/AvantGardeBookBT.ttf') format('truetype');font-weight:400;font-display:swap}
+@font-face{font-family:AvantGardeBkBT;src:url('assets/fonts/AvantGardeDemiBT.ttf') format('truetype');font-weight:700;font-display:swap}
+:root{
+  --night:#08070f;
+  --night2:#0c0a18;
+  --panel:#110e20;
+  --panel2:#15122a;
+  --ink:#f6f1ff;
+  --muted:rgba(246,241,255,.68);
+  --soft:rgba(246,241,255,.48);
+  --line:rgba(255,255,255,.14);
+  --cyan:#30CCFF;
+  --blue:#4d91ff;
+  --violet:#7B4CFF;
+  --pink:#FF3D9A;
+  --gold:#FFC34D;
+  --orange:#ff8a4c;
+  --green:#72e6a3;
+  --grad:linear-gradient(112deg,#7B4CFF 0%,#5B6CFF 30%,#30CCFF 66%,#54E6C0 100%);
+  --hot:linear-gradient(115deg,#7b4cff 0%,#ff2c9d 100%);
+  --accent-soft:linear-gradient(115deg,rgba(123,76,255,.18),rgba(255,44,157,.12));
+  --font-display:Axiforma,system-ui,sans-serif;
+  --font-ui:Gilroy,system-ui,sans-serif;
+  --font-body:Axiforma,system-ui,sans-serif;
+  --font-accent:AvantGardeBkBT,system-ui,sans-serif;
+  --max:1180px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  min-height:100vh;
+  font-family:var(--font-body);
+  font-weight:400;
+  color:var(--ink);
+  background:
+    radial-gradient(120% 80% at 50% -10%,rgba(123,76,255,.16),transparent 55%),
+    radial-gradient(90% 60% at 90% 110%,rgba(255,44,157,.08),transparent 60%),
+    linear-gradient(180deg,var(--night) 0%,var(--night2) 100%);
+  background-attachment:fixed;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.2;background-image:linear-gradient(rgba(255,255,255,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.045) 1px,transparent 1px);background-size:72px 72px;mask-image:radial-gradient(70% 72% at 50% 26%,#000,transparent 78%)}
+body::after{content:"";position:fixed;inset:auto 6% -18% 8%;height:46vh;pointer-events:none;z-index:0;background:radial-gradient(ellipse,rgba(123,76,255,.18),rgba(255,44,157,.08) 44%,transparent 72%);filter:blur(44px)}
+button,input,select{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+.wrap{width:min(91%,var(--max));margin:auto}
+.grad-text{background:var(--hot);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.eyebrow{display:inline-flex;align-items:center;width:max-content;max-width:100%;font-family:Gilroy,system-ui,sans-serif;font-weight:900;font-size:.7rem;letter-spacing:.08em;text-transform:none;color:#01fff0!important;text-shadow:0 0 20px rgba(1,255,240,.4);background:rgba(1,255,240,.08);border:1px solid rgba(1,255,240,.18);border-radius:999px;padding:.42rem .68rem}
+.nav{position:sticky;top:0;z-index:20;background:linear-gradient(180deg,rgba(8,7,15,.88),rgba(8,7,15,.54) 72%,transparent);backdrop-filter:blur(14px);border-bottom:0}
+.nav-in{height:72px;display:flex;align-items:center;justify-content:space-between;gap:22px}
+.brand{display:inline-flex;align-items:center;gap:10px;font-family:Gilroy,system-ui,sans-serif;font-weight:900;font-size:1.1rem}
+.mark{width:30px;height:30px;border-radius:9px;background:var(--hot);display:grid;place-items:center;box-shadow:0 6px 22px rgba(123,76,255,.5);position:relative}
+.mark::after{content:"";position:absolute;inset:6px;border-radius:5px;border:1.5px solid rgba(255,255,255,.72)}
+.mark svg{display:none}
+.nav-meta{display:flex;align-items:center;gap:14px;color:rgba(255,255,255,.72);font-family:Gilroy,system-ui,sans-serif;font-size:.78rem;font-weight:900}
+.avatar{width:auto;min-width:36px;height:36px;border-radius:999px;padding:0 13px;display:grid;place-items:center;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:#fff}
+.shell{display:block;padding:34px 0 42px}
+.stage{
+  min-height:calc(100vh - 154px);
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:26px;
+  background:
+    radial-gradient(70% 74% at 100% 0,rgba(255,95,174,.1),transparent 58%),
+    radial-gradient(62% 68% at 0 100%,rgba(25,230,214,.08),transparent 62%),
+    linear-gradient(168deg,rgba(255,255,255,.07),rgba(255,255,255,.025));
+  overflow:hidden;
+  position:relative;
+  box-shadow:0 60px 140px -88px rgba(0,0,0,.95)
+}
+.stage::before{content:"";position:absolute;inset:0;opacity:.09;background-image:linear-gradient(rgba(255,255,255,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.1) 1px,transparent 1px);background-size:36px 36px;mask-image:linear-gradient(to bottom,#000,transparent 82%);pointer-events:none}
+.screen{display:none;position:relative;z-index:1;padding:clamp(28px,4.5vw,58px) clamp(28px,5vw,70px) 116px}
+.screen.active{display:block;animation:screenIn .42s cubic-bezier(.2,.8,.2,1) both}
+@keyframes screenIn{from{opacity:0;transform:translateY(16px) scale(.992);filter:blur(6px)}to{opacity:1;transform:none;filter:none}}
+.screen-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,.78fr);gap:44px;align-items:center}
+.copy h1,.copy h2,.question h2{font-family:Axiforma,system-ui,sans-serif;font-weight:800;letter-spacing:0;line-height:1.02}
+.copy h1{font-size:clamp(2.8rem,5.6vw,5.4rem);max-width:12ch;margin:12px 0 22px;text-wrap:balance}
+.copy h2,.question h2{font-size:clamp(2rem,3.5vw,3.35rem);max-width:22ch;margin:10px 0 16px;text-wrap:balance}
+.copy p,.question p{color:var(--muted);font-family:var(--font-body);font-weight:400;max-width:60ch}
+.card-panel{border:1px solid rgba(255,255,255,.12);border-radius:22px;background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.025));padding:24px;backdrop-filter:blur(12px);box-shadow:0 30px 90px rgba(0,0,0,.22)}
+.auth-form{display:grid;gap:12px;margin-top:20px}
+.field{width:100%;height:48px;border-radius:12px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.06);color:#fff;padding:0 14px;outline:none}
+.field::placeholder{color:rgba(255,255,255,.45)}
+.check{display:flex;gap:10px;align-items:flex-start;color:var(--muted);font-size:.9rem}
+.check input{margin-top:4px}
+.btns{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:26px}
+.copy > .btns,.question > .progress-row,.processing .btns{display:none}
+.btn{min-height:46px;border-radius:999px;border:1px solid transparent;padding:.88em 1.35em;font-family:Gilroy,system-ui,sans-serif;font-weight:900;color:#fff;background:rgba(255,255,255,.06);transition:.2s;display:inline-flex;align-items:center;justify-content:center;gap:.55em;position:relative;overflow:hidden;background-clip:padding-box;-webkit-backface-visibility:hidden}
+.btn:hover{transform:translateY(-2px)}
+.btn:disabled{cursor:default;opacity:.48;filter:saturate(.55)}
+.btn:disabled:hover{transform:none}
+.btn-primary{background:var(--grad);background-size:116% 100%;background-position:center;border-color:rgba(255,255,255,.18);box-shadow:0 18px 46px -22px rgba(48,204,255,.86),0 12px 30px -24px rgba(123,76,255,.95),inset 0 1px 0 rgba(255,255,255,.28),inset 0 -1px 0 rgba(3,7,14,.16)}
+.btn-ghost{border-color:rgba(255,255,255,.18)}
+.btn-cyan{background:var(--grad);color:#05040b}
+.socials{display:grid;gap:10px;margin-top:18px}
+.social{min-height:42px;border-radius:12px;border:1px solid rgba(255,255,255,.13);display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.05);font-family:Gilroy,system-ui,sans-serif;font-weight:900;color:rgba(255,255,255,.78)}
+.divider{display:flex;align-items:center;gap:12px;margin:16px 0;color:var(--soft);font-size:.8rem}
+.divider::before,.divider::after{content:"";height:1px;flex:1;background:rgba(255,255,255,.14)}
+.visual{min-height:360px;border-radius:30px;position:relative;overflow:hidden;border:1px solid rgba(255,255,255,.14);background:linear-gradient(150deg,rgba(255,255,255,.09),rgba(255,255,255,.035))}
+.visual svg{position:absolute;inset:8%;width:84%;height:84%}
+.visual-caption{position:absolute;left:22px;right:22px;bottom:22px;border:1px solid rgba(255,255,255,.14);border-radius:20px;background:rgba(7,6,17,.62);backdrop-filter:blur(12px);padding:16px}
+.visual-caption strong{display:block;font-family:Axiforma,system-ui,sans-serif;margin-bottom:4px}
+.visual-caption span{color:var(--soft);font-size:.88rem}
+.music-map{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;position:absolute;inset:34px;align-content:center}
+.music-visual .music-map{inset:34px 34px 132px}
+.music-node{position:relative;min-height:116px;border:1px solid rgba(255,255,255,.14);border-radius:24px;background:linear-gradient(155deg,rgba(255,255,255,.09),rgba(255,255,255,.03));padding:18px;overflow:hidden}
+.music-visual .music-node{min-height:94px}
+.music-node::before{content:"";position:absolute;inset:auto -18px -28px auto;width:96px;height:96px;border-radius:50%;background:var(--hot);opacity:.18;filter:blur(6px)}
+.music-node strong{display:block;font-family:Axiforma,system-ui,sans-serif;font-size:1.02rem;margin-bottom:5px}
+.music-node span{position:relative;color:var(--muted);font-size:.82rem}
+.music-node i{display:block;width:34px;height:3px;border-radius:99px;background:var(--grad);margin-bottom:14px}
+.music-visual .music-node span{display:none}
+.info-list{display:grid;gap:16px;margin-top:26px}
+.info-item{display:grid;grid-template-columns:38px 1fr;gap:14px;align-items:start}
+.info-icon{width:38px;height:38px;border-radius:13px;background:rgba(159,255,240,.1);border:1px solid rgba(159,255,240,.18);display:grid;place-items:center;color:#9ffff0}
+.info-item p{font-size:.95rem}
+.audio-player{text-align:left;max-width:560px;margin:0 0 26px}
+.time{display:inline-flex;border:1px solid rgba(159,255,240,.5);color:#9ffff0;border-radius:8px;padding:3px 10px;font-family:Gilroy,system-ui,sans-serif;font-weight:900;font-size:.82rem;margin-bottom:10px}
+.wave{height:94px;display:flex;align-items:center;justify-content:center;gap:6px;position:relative;overflow:hidden;isolation:isolate}
+.wave i{width:6px;border-radius:99px;background:rgba(255,255,255,.2);position:relative;overflow:hidden;box-shadow:inset 0 1px 0 rgba(255,255,255,.1)}
+.wave i::before{content:"";position:absolute;inset:0;border-radius:inherit;background:var(--grad);opacity:0;transform:scaleY(.74);transform-origin:center;box-shadow:0 0 18px rgba(1,255,240,.35)}
+.wave.playing i::before{animation:waveBarFill .62s cubic-bezier(.18,.78,.18,1) both;animation-delay:calc(var(--i) * 34ms)}
+.wave::after{content:"";position:absolute;z-index:2;top:9px;bottom:9px;width:22%;left:0;pointer-events:none;background:linear-gradient(90deg,transparent,rgba(255,255,255,.16),transparent);filter:blur(9px);opacity:0;transform:translateX(-130%)}
+.wave.playing::after{animation:waveSweep 2.05s cubic-bezier(.16,.82,.22,1) both}
+@keyframes waveBarFill{0%{opacity:0;transform:scaleY(.58)}52%{opacity:1;transform:scaleY(1.08)}100%{opacity:1;transform:scaleY(1)}}
+@keyframes waveSweep{0%{opacity:0;transform:translateX(-130%)}12%{opacity:.84}88%{opacity:.84}100%{opacity:0;transform:translateX(590%)}}
+.pause{margin:8px 0 22px;width:76px;height:76px;border:0;border-radius:50%;background:linear-gradient(135deg,#01fff0,#ff2c9d);color:#05040b;font-size:2rem;font-weight:900;display:grid;place-items:center;box-shadow:0 24px 60px -30px rgba(1,255,240,.9)}
+.question{text-align:left;max-width:760px;margin:0 auto}
+.question .sub{font-family:AvantGardeBkBT,system-ui,sans-serif;color:#fff;font-size:1.3rem;margin-top:-6px}
+.options{display:grid;gap:10px;max-width:430px;margin:26px 0}
+.option{min-height:44px;border-radius:12px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.035);color:#fff;font-family:Gilroy,system-ui,sans-serif;font-weight:900;transition:.18s}
+.option:hover,.option.selected{border-color:rgba(1,255,240,.7);background:rgba(1,255,240,.12);box-shadow:0 18px 48px -32px rgba(1,255,240,.75)}
+.option.selected{background:var(--grad);background-size:116% 100%;border-color:rgba(255,255,255,.18);box-shadow:0 18px 46px -28px rgba(48,204,255,.82),inset 0 1px 0 rgba(255,255,255,.24)}
+.likert-options{grid-template-columns:repeat(9,minmax(70px,1fr));max-width:100%;gap:8px;align-items:stretch}
+.likert-options .option{min-height:76px;padding:10px 8px;font-size:.72rem;line-height:1.22}
+.likert-options.scale-7{grid-template-columns:repeat(7,minmax(84px,1fr))}
+.progress-row{display:grid;grid-template-columns:140px 1fr 140px;gap:16px;align-items:center;max-width:700px;margin:16px 0 0}
+.progress-count{color:var(--soft);font-family:Gilroy,system-ui,sans-serif;font-weight:900;text-align:center}
+.select-card{max-width:360px;margin:24px 0}
+select.field{appearance:none;-webkit-appearance:none;background-color:#171426;background-image:linear-gradient(45deg,transparent 50%,rgba(1,255,240,.9) 50%),linear-gradient(135deg,rgba(1,255,240,.9) 50%,transparent 50%);background-position:calc(100% - 20px) 20px,calc(100% - 14px) 20px;background-size:6px 6px;background-repeat:no-repeat;color:#f6f1ff;color-scheme:dark}
+select.field:focus{background-color:#201b36;border-color:rgba(1,255,240,.66);box-shadow:0 0 0 4px rgba(1,255,240,.1)}
+select.field option,select.field optgroup{background-color:#15122c;color:#f6f1ff}
+.custom-select{position:relative}
+.select-trigger{display:flex;align-items:center;justify-content:space-between;text-align:left;background:#171426}
+.select-trigger::after{content:"";width:10px;height:10px;border-right:2px solid var(--cyan);border-bottom:2px solid var(--cyan);transform:rotate(45deg);margin-top:-5px;transition:.2s}
+.custom-select.open .select-trigger{background:#201b36;border-color:rgba(1,255,240,.66);box-shadow:0 0 0 4px rgba(1,255,240,.1)}
+.custom-select.open .select-trigger::after{transform:rotate(225deg);margin-top:5px}
+.select-menu{display:none;position:absolute;left:0;right:0;top:calc(100% + 8px);z-index:10;border:1px solid rgba(1,255,240,.22);border-radius:16px;background:#15122c;box-shadow:0 28px 80px -44px rgba(1,255,240,.82),0 18px 38px rgba(0,0,0,.34);overflow:hidden;padding:6px}
+.custom-select.open .select-menu{display:grid;gap:4px}
+.select-option{min-height:42px;border:0;border-radius:10px;background:transparent;color:#f6f1ff;text-align:left;padding:0 12px;font-family:Gilroy,system-ui,sans-serif;font-weight:900}
+.select-option:hover,.select-option.selected{background:rgba(1,255,240,.12);color:#9ffff0}
+.processing{max-width:900px;margin:0 auto;text-align:left}
+.processing-steps{display:grid;gap:10px;margin:24px 0}
+.process-item{display:flex;align-items:center;gap:10px;color:rgba(246,241,255,.48);font-family:Gilroy,system-ui,sans-serif;font-weight:900}
+.process-item::before{content:"";width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.14)}
+.process-item.active{color:#fff}
+.process-item.active::before{background:var(--cyan);box-shadow:0 0 18px rgba(1,255,240,.55)}
+.process-item.done{color:#9ffff0}
+.process-item.done::before{background:linear-gradient(135deg,#7b4cff,#01fff0)}
+.processing-status{min-height:30px;color:#9ffff0!important;font-family:Gilroy,system-ui,sans-serif;font-weight:900}
+.cinema-fade{position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:0;background:radial-gradient(75% 80% at 50% 44%,#0a0518 0%,#050210 60%,#010008 100%);transition:opacity 1.4s ease}
+.cinema-fade.show{opacity:1;pointer-events:auto;transition:opacity .2s ease-out}
+body.ag-cinema{overflow:hidden}
+body.ag-cinema .nav{opacity:0;pointer-events:none;transition:opacity .6s ease}
+body.ag-cinema .flow-footer{opacity:0;pointer-events:none}
+body.ag-cinema .site-foot{opacity:0}
+body.ag-cinema .screen[data-step="processing"]{position:fixed;inset:0;z-index:60;margin:0;padding:0;animation:none!important;display:flex;align-items:center;justify-content:center;overflow-y:auto;background:radial-gradient(85% 80% at 50% 14%,rgba(123,76,255,.34),transparent 60%),radial-gradient(70% 70% at 88% 112%,rgba(255,44,157,.2),transparent 58%),radial-gradient(60% 60% at 10% 110%,rgba(1,255,240,.18),transparent 60%),linear-gradient(180deg,#160d36 0%,#0c0723 52%,#060314 100%)}
+body.ag-cinema .screen[data-step="processing"] .question{max-width:none;width:100%;margin:0;padding:0;text-align:center}
+.cinema-scene{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;width:min(680px,92vw);margin:auto;padding:clamp(24px,5vh,52px) 20px;text-align:center}
+.cinema-eyebrow{margin:0 auto}
+.sphere-wrap{position:relative;isolation:isolate;display:grid;place-items:center;width:min(62vmin,500px);max-width:90vw;perspective:660px}
+.sphere-wrap::after{content:"";position:absolute;z-index:0;left:12%;right:12%;bottom:-4%;height:22%;border-radius:50%;background:radial-gradient(ellipse,rgba(1,255,240,.3),rgba(123,76,255,.16) 42%,transparent 74%);filter:blur(18px);opacity:.86;transform:rotateX(72deg) translateZ(-120px)}
+.genome-sphere{position:relative;z-index:1;width:100%;height:auto;overflow:visible;filter:none;will-change:transform;animation:cameraOrbit 15s cubic-bezier(.45,0,.2,1) infinite}
+.sph-zoom{transform-box:fill-box;transform-origin:center;animation:sphBreathe 9s ease-in-out infinite}
+.sph-halo{fill:#7b4cff;opacity:.18;transition:opacity .5s ease}
+.sph-body{opacity:.9}
+.sph-volume{mix-blend-mode:multiply;opacity:.72}
+.sph-lift{mix-blend-mode:screen;opacity:.72}
+.sph-wire *{opacity:.26;stroke-width:1}
+.sph-rim{filter:drop-shadow(0 0 10px rgba(1,255,240,.48));transition:opacity .5s ease}
+.sph-edge{opacity:.2;filter:blur(.65px);stroke-width:4}
+.sph-spec{filter:blur(5px);opacity:.84}
+.sph-spec-hot{filter:blur(9px);opacity:.62;mix-blend-mode:screen}
+.gores path{mix-blend-mode:screen}
+.gore{transform-box:fill-box;transform-origin:center;opacity:0;fill-opacity:0;transition:opacity .9s ease,fill-opacity .9s ease,transform .95s cubic-bezier(.16,.84,.3,1),filter .9s ease}
+.gore.g1{fill:var(--ag-c1,#01fff0);color:var(--ag-c1,#01fff0)}
+.gore.g2{fill:var(--ag-c2,#38ccff);color:var(--ag-c2,#38ccff)}
+.gore.g3{fill:var(--ag-c3,#7b4cff);color:var(--ag-c3,#7b4cff)}
+.gore.g4{fill:var(--ag-c4,#ff2c9d);color:var(--ag-c4,#ff2c9d)}
+.gore:nth-of-type(1){transform:translate(-54px,-30px) rotate(-18deg) scale(.35)}
+.gore:nth-of-type(2){transform:translate(-44px,38px) rotate(10deg) scale(.38)}
+.gore:nth-of-type(3){transform:translate(2px,-50px) rotate(-6deg) scale(.34)}
+.gore:nth-of-type(4){transform:translate(50px,-28px) rotate(16deg) scale(.36)}
+.gore.locked{opacity:1;fill-opacity:.74;transform:none;filter:drop-shadow(2px 4px 3px rgba(0,0,0,.18)) drop-shadow(0 0 9px currentColor)}
+.sphere-pct{position:absolute;inset:0;z-index:5;display:flex;align-items:center;justify-content:center;pointer-events:none;font-family:Gilroy,system-ui,sans-serif;font-weight:900;color:#fff;font-size:clamp(1.7rem,4.4vw,2.55rem);text-shadow:0 0 18px rgba(1,255,240,.9),0 0 42px rgba(123,76,255,.72),0 2px 8px rgba(0,0,0,.55)}
+.sphere-pct::before{content:"";position:absolute;width:clamp(96px,15vmin,132px);height:clamp(50px,8vmin,70px);border-radius:999px;background:rgba(3,1,12,.72);border:1px solid rgba(255,255,255,.22);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 18px 40px rgba(0,0,0,.3);backdrop-filter:blur(10px)}
+.sphere-pct span,.sphere-pct i{position:relative;z-index:1}
+.sphere-pct i{font-style:normal;font-size:.5em;opacity:.76;margin-left:2px}
+.sphere-wrap.count-pop .sphere-pct{animation:countPop .34s cubic-bezier(.18,.82,.24,1)}
+.sphere-wrap.sealed .sph-zoom{animation:sphPunch 1.3s cubic-bezier(.2,.9,.2,1) both}
+.sphere-wrap.sealed .sph-rim{stroke-width:2.4;opacity:.86}
+.cinema-scene .processing-steps{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 16px;max-width:580px;margin:6px 0 0}
+.cinema-scene .process-item:nth-of-type(1){--gc:var(--ag-c1,#01fff0)}
+.cinema-scene .process-item:nth-of-type(2){--gc:var(--ag-c2,#38ccff)}
+.cinema-scene .process-item:nth-of-type(3){--gc:var(--ag-c3,#7b4cff)}
+.cinema-scene .process-item:nth-of-type(4){--gc:var(--ag-c4,#ff2c9d)}
+.cinema-scene .process-item::before{background:var(--gc);opacity:.3}
+.cinema-scene .process-item.active::before,.cinema-scene .process-item.done::before{opacity:1;box-shadow:0 0 14px var(--gc)}
+.cinema-scene .processing-status{max-width:620px;margin:0 auto;color:#cfffff!important;font-size:1rem}
+.cinema-continue{margin-top:4px;opacity:0;transform:translateY(12px);pointer-events:none;transition:opacity .7s ease .2s,transform .7s ease .2s}
+.cinema-scene.is-done .cinema-continue{opacity:1;transform:none;pointer-events:auto}
+.cinema-scene.is-done .processing-status{color:#fff!important}
+.pentagon-wrap{position:relative;isolation:isolate;display:grid;place-items:center;width:min(58vmin,470px);max-width:90vw;--build-progress:0}
+.pentagon-wrap::before{content:"";position:absolute;z-index:0;inset:-20%;border-radius:50%;background:conic-gradient(from -48deg,rgba(139,108,255,.62),rgba(77,145,255,.5),rgba(23,243,230,.5),rgba(255,95,174,.56),rgba(255,200,87,.48),rgba(139,108,255,.62));filter:blur(48px);opacity:.68;animation:pentaAura 7s ease-in-out infinite}
+.pentagon-wrap::after{content:"";position:absolute;z-index:0;left:11%;right:11%;bottom:2%;height:16%;border-radius:50%;background:radial-gradient(ellipse,rgba(25,230,214,.36),rgba(123,76,255,.18) 48%,transparent 76%);filter:blur(22px);opacity:.95;transform:translateY(16px)}
+.penta-3d{position:relative;z-index:1;width:100%;animation:pentaFloat 7.5s cubic-bezier(.45,0,.2,1) infinite}
+.genome-pentagon{width:100%;height:auto;overflow:visible;filter:drop-shadow(0 34px 58px rgba(0,0,0,.42))}
+.penta-shell{fill:rgba(10,8,30,.48);stroke:rgba(255,255,255,.24);stroke-width:2}
+.penta-grid polygon{fill:none;stroke:rgba(255,255,255,.16);stroke-width:1.2}
+.penta-grid .major{stroke:rgba(255,255,255,.25);stroke-width:1.5}
+.penta-rim{fill:none;stroke:url(#pentaRimGrad);stroke-width:5;stroke-linejoin:round;filter:drop-shadow(0 0 18px rgba(1,255,240,.42))}
+.genome-pentagon .gore{opacity:.36;fill-opacity:1;transform-origin:256px 264px;transform:scale(.985);filter:saturate(1.02) brightness(.92);transition:opacity .72s ease,filter .76s ease,transform .72s cubic-bezier(.16,.84,.3,1)}
+.genome-pentagon .gore.g1{fill:url(#facetG1);color:#8b6cff}
+.genome-pentagon .gore.g2{fill:url(#facetG2);color:#4d91ff}
+.genome-pentagon .gore.g3{fill:url(#facetG3);color:#17f3e6}
+.genome-pentagon .gore.g4{fill:url(#facetG4);color:#ff5fae}
+.genome-pentagon .gore.g5{fill:url(#facetG5);color:#ffc857}
+.genome-pentagon .gore.locked{opacity:1;filter:saturate(1.34) brightness(1.24) drop-shadow(0 0 16px currentColor);transform:scale(1)}
+.penta-progress-ring{fill:none;stroke:rgba(255,255,255,.11);stroke-width:8;stroke-linejoin:round}
+.penta-progress-live{fill:none;stroke:url(#pentaProgressGrad);stroke-width:8;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:100;stroke-dashoffset:calc(100 - var(--build-progress,0));filter:drop-shadow(0 0 15px rgba(255,95,174,.6));transition:stroke-dashoffset .68s cubic-bezier(.2,.8,.2,1)}
+.penta-glass{fill:url(#pentaGlass);mix-blend-mode:screen;opacity:.58}
+.penta-depth{fill:url(#pentaDepth);mix-blend-mode:multiply;opacity:.22}
+.penta-shine{fill:url(#pentaShine);mix-blend-mode:screen;opacity:.45;animation:pentaShine 5.8s ease-in-out infinite}
+.penta-center-lens{fill:url(#pentaCenter);stroke:rgba(255,255,255,.2);stroke-width:1.3;filter:drop-shadow(0 18px 34px rgba(0,0,0,.36))}
+.penta-core-ring{fill:none;stroke:rgba(255,255,255,.2);stroke-width:1.1;stroke-dasharray:6 11;animation:pentaPulse 2.6s ease-in-out infinite}
+.penta-percent-text{font-family:Axiforma,Gilroy,system-ui,sans-serif;font-size:60px;font-weight:900;letter-spacing:0;text-anchor:middle;dominant-baseline:central;fill:#fff;filter:drop-shadow(0 0 20px rgba(1,255,240,.46))}
+.penta-percent-label{font-family:Gilroy,system-ui,sans-serif;font-size:13px;font-weight:800;letter-spacing:2.4px;text-anchor:middle;text-transform:uppercase;fill:rgba(246,241,255,.76)}
+.penta-spark{fill:#fff;opacity:.34;filter:drop-shadow(0 0 12px currentColor);animation:pentaSpark 3.8s ease-in-out infinite}
+.penta-spark.s1{color:#8b6cff;animation-delay:-.2s}.penta-spark.s2{color:#4d91ff;animation-delay:-.9s}.penta-spark.s3{color:#17f3e6;animation-delay:-1.6s}.penta-spark.s4{color:#ff5fae;animation-delay:-2.3s}.penta-spark.s5{color:#ffc857;animation-delay:-3s}
+.pentagon-wrap.count-pop .genome-pentagon{animation:pentaTick .36s cubic-bezier(.18,.82,.24,1)}
+.pentagon-wrap.sealed .genome-pentagon{animation:pentaSeal 1.15s cubic-bezier(.2,.9,.2,1) both}
+.processing-step-card{width:min(520px,90vw);min-height:94px;border:1px solid rgba(255,255,255,.13);border-radius:22px;background:linear-gradient(160deg,rgba(255,255,255,.08),rgba(255,255,255,.035));box-shadow:0 24px 72px -54px rgba(25,230,214,.85);padding:16px 18px;display:grid;grid-template-columns:54px 1fr;gap:14px;align-items:center;text-align:left;backdrop-filter:blur(14px)}
+.processing-step-card span{width:54px;height:54px;border-radius:18px;display:grid;place-items:center;background:linear-gradient(135deg,rgba(123,76,255,.3),rgba(255,95,174,.18));border:1px solid rgba(255,255,255,.15);font-family:var(--font-ui);font-weight:900;color:#fff}
+.processing-step-card b{display:block;font-family:var(--font-display);font-size:1.04rem;line-height:1.2}
+.processing-step-card small{display:block;margin-top:4px;color:rgba(246,241,255,.62);font-size:.84rem;line-height:1.45}
+.sr-pct{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+@keyframes processingReveal{from{opacity:0;transform:translateY(18px);filter:blur(8px)}to{opacity:1;transform:none;filter:none}}
+@keyframes processingZoom{from{opacity:0;transform:scale(.92);filter:blur(10px)}to{opacity:1;transform:none;filter:none}}
+@keyframes cameraOrbit{0%,100%{transform:rotateY(-20deg) rotateX(10deg) rotateZ(-.6deg) scale(1)}50%{transform:rotateY(22deg) rotateX(12deg) rotateZ(.6deg) scale(1.025)}}
+@keyframes sphBreathe{0%,100%{transform:scale(.97)}50%{transform:scale(1.05)}}
+@keyframes sphPunch{0%{transform:scale(1)}38%{transform:scale(1.16)}100%{transform:scale(1.02)}}
+@keyframes countPop{0%{transform:scale(.86);filter:blur(2px)}100%{transform:scale(1);filter:none}}
+@keyframes pentaFloat{0%,100%{transform:translateY(0) scale(.985);filter:saturate(1.08)}50%{transform:translateY(-10px) scale(1.018);filter:saturate(1.22)}}
+@keyframes pentaAura{0%,100%{transform:rotate(0deg) scale(.94);opacity:.45}50%{transform:rotate(28deg) scale(1.06);opacity:.7}}
+@keyframes pentaTick{0%{transform:scale(.965);filter:blur(2px) brightness(1.05)}65%{transform:scale(1.035);filter:brightness(1.22)}100%{transform:scale(1);filter:none}}
+@keyframes pentaSeal{0%{transform:scale(1)}45%{transform:scale(1.12);filter:brightness(1.32) saturate(1.28)}100%{transform:scale(1.03);filter:brightness(1.08)}}
+@keyframes pentaPulse{0%,100%{opacity:.28;transform:scale(.96);transform-origin:256px 264px}50%{opacity:.72;transform:scale(1.04);transform-origin:256px 264px}}
+@keyframes pentaShine{0%,100%{opacity:.2;transform:translateX(-8px);transform-origin:256px 264px}50%{opacity:.56;transform:translateX(12px);transform-origin:256px 264px}}
+@keyframes pentaSpark{0%,100%{opacity:.24;transform:scale(.86);transform-origin:center}50%{opacity:.72;transform:scale(1.2);transform-origin:center}}
+@media(prefers-reduced-motion:reduce){
+  .cinema-fade{transition:none}
+  .genome-sphere,.sph-zoom,.sphere-wrap.sealed .sph-zoom,.penta-3d,.pentagon-wrap.sealed .genome-pentagon,.penta-core-ring,.penta-shine,.penta-spark,.wave.playing i::before,.wave.playing::after{animation:none}
+  .wave i::before{opacity:1;transform:scaleY(1)}
+  .gore{transition:opacity .2s ease,fill-opacity .2s ease}
+  .gore:nth-of-type(1),.gore:nth-of-type(2),.gore:nth-of-type(3),.gore:nth-of-type(4){transform:none}
+}
+.goal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}
+.goal{position:relative;min-height:150px;text-align:left;border:1px solid rgba(255,255,255,.14);border-radius:22px;background:linear-gradient(168deg,rgba(255,255,255,.08),rgba(255,255,255,.03));padding:20px;color:#fff;overflow:hidden}
+.goal::before{content:"";position:absolute;left:-1px;top:-1px;bottom:-1px;width:4px;background:var(--hot)}
+.goal h3{font-family:Axiforma,system-ui,sans-serif;font-size:1.05rem;margin-bottom:8px}
+.goal p{color:var(--muted);font-size:.87rem}
+.goal.selected{border-color:rgba(1,255,240,.62);box-shadow:0 30px 90px -60px rgba(1,255,240,.75)}
+.packages{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px}
+.package{display:flex;flex-direction:column;min-height:520px;border:1px solid rgba(255,255,255,.14);border-radius:24px;background:rgba(255,255,255,.045);padding:24px}
+.package.feature{background:linear-gradient(170deg,rgba(123,76,255,.18),rgba(255,44,157,.09));border-color:rgba(255,44,157,.42)}
+.package h3{font-family:Axiforma,system-ui,sans-serif;font-size:1.8rem;margin-bottom:4px}
+.package .row{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin:10px 0 12px}
+.package .row span{display:inline-flex;align-items:center;border:1px solid rgba(1,255,240,.18);border-radius:999px;padding:.42rem .62rem;background:rgba(1,255,240,.07);color:#9ffff0;font-family:Gilroy,system-ui,sans-serif;font-weight:900;font-size:.72rem;line-height:1.15}
+.package .row span:last-child{border-color:rgba(255,44,157,.22);background:rgba(255,44,157,.09);color:#ffd9ef}
+.package-note{color:var(--muted);font-size:.9rem;margin:2px 0 10px}
+.include-badge{display:inline-flex;width:max-content;max-width:100%;border-radius:999px;padding:.45rem .68rem;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);color:#fff;font-family:Gilroy,system-ui,sans-serif;font-weight:900;font-size:.74rem;margin:4px 0 10px}
+.list-label{font-family:Gilroy,system-ui,sans-serif;font-weight:900;color:#9ffff0;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;margin-top:8px}
+.package ul{display:grid;gap:11px;margin:22px 0 28px;list-style:none;color:rgba(246,241,255,.75)}
+.package ul.tight{margin-top:8px}
+.package li{display:flex;gap:10px;align-items:flex-start}
+.package li::before{content:"";width:18px;height:18px;border-radius:50%;margin-top:2px;flex:0 0 auto;background:var(--grad)}
+.price{font-family:Axiforma,system-ui,sans-serif;font-weight:800;font-size:2rem;margin-top:auto}
+.footer-note{border-top:1px solid rgba(255,255,255,.1);margin-top:30px;padding-top:18px;color:var(--soft);font-size:.78rem;max-width:820px}
+.flow-footer{position:absolute;left:clamp(24px,5vw,70px);right:clamp(24px,5vw,70px);bottom:26px;z-index:3;display:grid;grid-template-columns:auto minmax(180px,1fr) auto;gap:18px;align-items:center;padding-top:18px;border-top:1px solid rgba(255,255,255,.1)}
+.flow-copy{display:flex;align-items:center;gap:14px;min-width:0}
+.flow-count{font-family:Gilroy,system-ui,sans-serif;font-weight:900;color:var(--cyan);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;white-space:nowrap}
+.flow-track{width:min(420px,38vw);height:11px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;position:relative;box-shadow:inset 0 0 0 1px rgba(255,255,255,.07)}
+.flow-fill{height:100%;width:8%;border-radius:inherit;background:var(--hot);transition:width .55s cubic-bezier(.2,.8,.2,1);box-shadow:0 0 28px rgba(1,255,240,.35)}
+.flow-label{color:var(--soft);font-size:.78rem;font-family:Gilroy,system-ui,sans-serif;font-weight:900;white-space:nowrap}
+.flow-actions{display:flex;gap:10px;justify-content:flex-end}
+.flow-actions .btn{min-width:118px}
+.flow-actions .btn[hidden]{display:none}
+.transition-signal{position:absolute;inset:auto 7% 88px 7%;height:30px;z-index:2;pointer-events:none;opacity:0;transform:none}
+.transition-signal svg{width:100%;height:100%;overflow:visible}
+.transition-signal path{stroke:url(#transitionGrad);stroke-width:5;stroke-linecap:round;fill:none;stroke-dasharray:1;stroke-dashoffset:1}
+.stage.transitioning .transition-signal{animation:signalFade 1.24s ease both}
+.stage.transitioning .transition-signal path{animation:drawSignal 1.05s linear both}
+@keyframes signalFade{0%{opacity:0}10%,86%{opacity:1}100%{opacity:0}}
+@keyframes drawSignal{0%{stroke-dashoffset:1}100%{stroke-dashoffset:0}}
+.site-foot{width:min(91%,var(--max));margin:0 auto 26px;color:rgba(246,241,255,.38);font-size:.72rem;text-align:center}
+.assessment-kicker{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 0}
+.pill{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:.45rem .7rem;background:rgba(255,255,255,.04);color:rgba(246,241,255,.78);font-family:var(--font-ui);font-weight:700;font-size:.76rem}
+.pill i{display:block;width:7px;height:7px;border-radius:50%;background:var(--pc,var(--cyan));box-shadow:0 0 12px var(--pc,var(--cyan))}
+.mini-report{display:grid;gap:14px}
+.mini-genome{position:relative;min-height:270px;border:1px solid rgba(255,255,255,.12);border-radius:22px;background:radial-gradient(52% 50% at 52% 42%,rgba(139,108,255,.32),transparent 62%),linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.025));overflow:hidden;padding:22px}
+.mini-genome::before{content:"";position:absolute;inset:36px;border-radius:50%;background:conic-gradient(from 10deg,var(--violet),var(--blue),var(--cyan),var(--pink),var(--gold),var(--violet));filter:blur(10px);opacity:.56}
+.mini-genome::after{content:"";position:absolute;inset:64px;border:1px solid rgba(255,255,255,.1);border-radius:50%;background:rgba(8,7,15,.58);backdrop-filter:blur(14px)}
+.mini-genome strong,.mini-genome span{position:relative;z-index:1}
+.mini-genome strong{display:block;font-family:var(--font-display);font-size:2.2rem;line-height:1.02;margin-top:126px}
+.mini-genome span{display:block;color:var(--muted);font-size:.9rem;margin-top:8px}
+.mini-stack{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.mini-card,.insight-card{border:1px solid rgba(255,255,255,.12);border-radius:16px;background:rgba(255,255,255,.04);padding:14px}
+.mini-card b,.insight-card b{display:block;font-family:var(--font-ui);font-weight:900;font-size:.82rem;margin-bottom:5px}
+.mini-card small,.insight-card small{display:block;color:var(--muted);font-size:.78rem;line-height:1.45}
+.guide-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:26px}
+.guide-card{position:relative;border:1px solid rgba(255,255,255,.12);border-radius:18px;background:rgba(255,255,255,.04);padding:18px;overflow:hidden}
+.guide-card::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,var(--gc,var(--violet)),transparent)}
+.guide-card h3{font-family:var(--font-display);font-size:1.05rem;margin-bottom:7px}
+.guide-card p{font-size:.88rem}
+.question-helper{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0}
+.question-helper .insight-card{border-color:rgba(255,255,255,.1)}
+.option small{display:block;margin-top:4px;color:rgba(255,255,255,.62);font-family:var(--font-body);font-weight:400;font-size:.68rem;line-height:1.24}
+.goal{transition:transform .22s cubic-bezier(.18,.9,.22,1.12),border-color .22s ease,background .22s ease}
+.goal::before{background:var(--goal-color,var(--hot))}
+.goal:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.26)}
+.goal.selected::after{content:"Selected";position:absolute;top:14px;right:14px;border:1px solid rgba(255,255,255,.16);border-radius:999px;padding:.26rem .48rem;background:rgba(255,255,255,.08);font-family:var(--font-ui);font-size:.64rem;color:#fff}
+.goal-limit{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:16px;padding:14px 16px;border:1px solid rgba(255,255,255,.1);border-radius:16px;background:rgba(255,255,255,.035);color:var(--muted);font-size:.88rem}
+.domain-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:26px}
+.domain-card{position:relative;min-height:206px;text-align:left;border:1px solid rgba(255,255,255,.12);border-radius:18px;background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.025));padding:16px;color:#fff;overflow:hidden;display:flex;flex-direction:column;transition:transform .22s cubic-bezier(.18,.9,.22,1.12),border-color .22s ease}
+.domain-card::before{content:"";position:absolute;left:-40px;bottom:-54px;width:118px;height:118px;border-radius:50%;background:var(--domain-color,var(--cyan));opacity:.16;filter:blur(8px)}
+.domain-card:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--domain-color,var(--cyan)) 48%,white 0%)}
+.domain-card.selected{border-color:var(--domain-color,var(--cyan));box-shadow:0 24px 70px -54px var(--domain-color,var(--cyan))}
+.domain-icon{position:relative;width:38px;height:38px;border-radius:13px;background:color-mix(in srgb,var(--domain-color,var(--cyan)) 16%,transparent);border:1px solid color-mix(in srgb,var(--domain-color,var(--cyan)) 34%,transparent);display:grid;place-items:center;color:var(--domain-color,var(--cyan));margin-bottom:16px}
+.domain-icon svg{width:21px;height:21px}
+.domain-card h3{position:relative;font-family:var(--font-display);font-size:1rem;margin-bottom:7px}
+.domain-card p{position:relative;color:var(--muted);font-size:.8rem;line-height:1.45}
+.domain-card small{position:relative;display:block;margin-top:auto;padding-top:12px;color:rgba(246,241,255,.48);font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;font-family:var(--font-ui);font-weight:900}
+.spotify-panel{display:grid;grid-template-columns:minmax(0,.95fr) minmax(300px,1.05fr);gap:18px;margin-top:28px}
+.spotify-card,.upload-zone,.roadmap-card{border:1px solid rgba(255,255,255,.12);border-radius:20px;background:rgba(255,255,255,.04);padding:20px}
+.spotify-card h3,.roadmap-card h3{font-family:var(--font-display);font-size:1.16rem;margin-bottom:8px}
+.spotify-card p,.roadmap-card p{font-size:.9rem}
+.music-roadmap{display:grid;gap:10px;margin-top:18px;list-style:none}
+.music-roadmap li{display:grid;grid-template-columns:28px 1fr;gap:10px;align-items:start;color:var(--muted);font-size:.86rem}
+.music-roadmap li span{width:28px;height:28px;border-radius:10px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.045);font-family:var(--font-ui);font-weight:900;color:#fff}
+.music-roadmap li.active span{background:var(--grad);background-size:116% 100%;border-color:rgba(255,255,255,.18);box-shadow:inset 0 1px 0 rgba(255,255,255,.24)}
+.upload-zone{border-style:dashed;display:grid;place-items:center;text-align:center;min-height:248px;background:radial-gradient(60% 70% at 50% 0,rgba(25,230,214,.12),transparent 68%),rgba(255,255,255,.035)}
+.upload-zone strong{font-family:var(--font-display);font-size:1.25rem}
+.upload-zone span{display:block;color:var(--muted);font-size:.88rem;margin-top:7px;max-width:34ch}
+.upload-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:18px}
+.package{border-radius:20px;background:linear-gradient(180deg,rgba(255,255,255,.055),rgba(255,255,255,.025));min-height:560px}
+.package h3{font-size:1.55rem}
+.package.feature{background:linear-gradient(170deg,rgba(123,76,255,.18),rgba(255,44,157,.1));border-color:rgba(255,95,174,.34);box-shadow:0 36px 90px -74px rgba(255,44,157,.8)}
+.preview-matrix{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:22px 0}
+.preview-matrix .mini-card{min-height:112px}
+.price small{display:block;color:var(--muted);font-family:var(--font-body);font-weight:400;font-size:.8rem;margin-top:2px}
+.consent-note{margin-top:14px;color:rgba(246,241,255,.5)!important;font-size:.78rem!important}
+@media(max-width:980px){
+  .shell{display:block}
+  .screen-grid,.goal-grid,.packages,.guide-grid,.spotify-panel{grid-template-columns:1fr}
+  .domain-grid{grid-template-columns:repeat(2,1fr)}
+  .processing-cinema{grid-template-columns:1fr}
+  .processing-stage{min-height:260px}
+  .visual{min-height:300px}
+}
+@media(max-width:560px){
+  body{max-width:100vw}
+  .wrap{width:100%;max-width:100%;padding-left:16px;padding-right:16px}
+  .nav-meta .hide-sm{display:none}
+  .shell{display:block;padding-top:20px;max-width:100%;min-width:0}
+  .stage{width:min(100%,358px);max-width:358px;min-width:0;margin-left:0;margin-right:0}
+  .stage,.screen,.screen-grid,.card-panel{max-width:100%;min-width:0}
+  .stage{margin-top:0}
+  .screen{padding:24px 20px 118px;overflow:hidden}
+  .screen-grid{display:block}
+  .screen-grid>*{min-width:0;max-width:100%}
+  .card-panel{padding:18px}
+  .music-map,.music-visual .music-map{position:relative;inset:auto;grid-template-columns:1fr;padding:18px}
+  .music-node{min-height:auto}
+  .processing-stage{min-height:230px}
+  .processing-cinema{gap:24px}
+  .copy h1{font-size:2.55rem;max-width:12ch}
+  .copy h2,.question h2{font-size:2.05rem;max-width:100%}
+  .eyebrow{font-size:.62rem;letter-spacing:.12em}
+  .copy p,.question p{max-width:100%;overflow-wrap:anywhere}
+  .auth-form,.field,.socials,.social{max-width:100%;min-width:0}
+  .progress-row{grid-template-columns:1fr}
+  .btn{width:100%;white-space:normal;text-align:center}
+  .likert-options,.likert-options.scale-7{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .likert-options .option{min-height:58px}
+  .guide-grid,.question-helper,.domain-grid,.mini-stack,.preview-matrix{grid-template-columns:1fr}
+  .domain-card{min-height:148px}
+  .flow-footer{left:20px;right:20px;bottom:20px;grid-template-columns:1fr;gap:8px}
+  .flow-copy{justify-content:space-between}
+  .flow-track{width:100%}
+  .flow-actions{justify-content:stretch}
+  .flow-actions .btn{min-width:0;flex:1}
+  .transition-signal{inset:auto 20px 82px 20px}
+}
+
+/* Personic play-P asset mark */
+.brand-asset-mark{
+  background:transparent!important;
+  border-radius:0!important;
+  box-shadow:none!important;
+  overflow:visible!important;
+}
+.brand-asset-mark::before,
+.brand-asset-mark::after{display:none!important}
+.brand-asset-img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:contain;
+  filter:drop-shadow(0 10px 22px rgba(123,76,255,.38));
+}
+
+
+/* ===== SPECTRAL REFINEMENT (premiumization overlay) ===== */
+:root{--mono:ui-monospace,"SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+  --spectrum:linear-gradient(100deg,#7B4CFF 0%,#5B6CFF 24%,#30CCFF 46%,#54E6C0 68%,#FFC34D 86%,#FF3D9A 100%);
+  --grad-btn:linear-gradient(112deg,#7B4CFF 0%,#5B6CFF 30%,#30CCFF 66%,#54E6C0 100%);}
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.045;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>")}
+.eyebrow{font-family:var(--mono)!important;font-weight:500!important;font-size:.7rem!important;letter-spacing:.24em!important;
+  color:rgba(246,241,255,.62)!important;text-shadow:none!important;gap:.6em}
+.eyebrow::before{content:"";width:18px;height:1px;background:var(--spectrum);display:inline-block;margin-right:.2em}
+.assessment-kicker,.flow-label,.flow-count,.list-label,.consent-note,.footer-note{font-family:var(--mono)!important}
+.btn{border-radius:999px!important;font-weight:600;letter-spacing:-.01em;position:relative;overflow:hidden;background-clip:padding-box;-webkit-backface-visibility:hidden;
+  transition:transform .25s cubic-bezier(.2,.7,.3,1),box-shadow .25s,background .25s,border-color .25s,filter .25s}
+.btn:hover{transform:translateY(-2px)}
+.btn-primary{background:var(--grad-btn)!important;background-size:116% 100%!important;background-position:center!important;border-color:rgba(255,255,255,.18)!important;box-shadow:0 18px 46px -22px rgba(48,204,255,.86),0 12px 30px -24px rgba(123,76,255,.95),inset 0 1px 0 rgba(255,255,255,.28),inset 0 -1px 0 rgba(3,7,14,.16)!important;color:#fff!important}
+.btn-primary:hover{filter:saturate(1.08) brightness(1.04);box-shadow:0 22px 54px -22px rgba(48,204,255,.92),0 16px 38px -26px rgba(123,76,255,1),inset 0 1px 0 rgba(255,255,255,.32),inset 0 -1px 0 rgba(3,7,14,.14)!important}
+.btn-ghost{background:rgba(255,255,255,.04)!important;border:1px solid rgba(255,255,255,.16)!important;color:#fff}
+.btn-ghost:hover{background:rgba(255,255,255,.08)!important;border-color:rgba(255,255,255,.3)!important}
+.field,input.field,select.field,.auth-form input,.auth-form select{border-radius:12px!important;background:rgba(255,255,255,.045)!important;
+  border:1px solid rgba(255,255,255,.16)!important;color:#fff;transition:border-color .2s,background .2s}
+.field:focus,.auth-form input:focus,.auth-form select:focus{border-color:#30CCFF!important;background:rgba(255,255,255,.07)!important;outline:none}
+.card-panel{border:1px solid rgba(255,255,255,.1)!important;background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.012))!important;border-radius:22px!important}
+.flow-fill{background:var(--spectrum)!important;box-shadow:0 0 22px rgba(48,204,255,.4)!important}
+.flow-track{box-shadow:inset 0 0 0 1px rgba(255,255,255,.08)!important}
+.btn-cyan{color:#05040b!important}
+.divider{opacity:.6}
+.grad-text,.major{letter-spacing:-.02em}
+
+</style>
+<link rel="icon" href="assets/logos/personic-play-p-favicon.svg" />
+</head>
+<body>
+<nav class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="personic-soundtrack-standalone.html">
+      <span class="mark brand-asset-mark" aria-hidden="true"><img class="brand-asset-img" src="assets/logos/personic-play-p-mark-gradient.svg" alt=""></span>
+      <span>Personic<br><small style="display:block;color:rgba(246,241,255,.52);font-size:.62rem;letter-spacing:.04em;text-transform:none;line-height:1.1">Soundtrack</small></span>
+    </a>
+    <div class="nav-meta"><span class="hide-sm">Assessment</span><span class="avatar" id="navPerson">Aneesh</span></div>
+  </div>
+</nav>
+
+<main class="wrap shell">
+  <section class="stage" aria-live="polite">
+    <div class="transition-signal" aria-hidden="true">
+      <svg viewBox="0 0 900 42" preserveAspectRatio="none">
+        <defs><linearGradient id="transitionGrad" x1="0" x2="1"><stop offset="0" stop-color="#7b4cff"/><stop offset=".52" stop-color="#01fff0"/><stop offset="1" stop-color="#ff2c9d"/></linearGradient></defs>
+        <path pathLength="1" d="M0 24H120c18 0 20-17 35-17s20 34 36 34 18-17 34-17h675"/>
+      </svg>
+    </div>
+    <article class="screen active" data-step="account">
+      <div class="screen-grid">
+        <div class="copy">
+          <p class="eyebrow">Start your profile</p>
+          <h1>Build your <span class="grad-text">Soundtrack.</span></h1>
+          <p>Create a profile so Personic can save your Snapshot, connect your selected goals to the report, and keep your recommendations available after the reveal.</p>
+          <div class="assessment-kicker" aria-label="Assessment ingredients">
+            <span class="pill" style="--pc:var(--cyan)"><i></i>Sound-first signal</span>
+            <span class="pill" style="--pc:var(--violet)"><i></i>Personality calibration</span>
+            <span class="pill" style="--pc:var(--pink)"><i></i>Goal-driven recommendations</span>
+          </div>
+        </div>
+        <div class="card-panel">
+          <div class="auth-form">
+            <input class="field" id="fullName" placeholder="Full Name" aria-label="Full Name" value="Aneesh Patel">
+            <input class="field" placeholder="Email" aria-label="Email">
+            <input class="field" placeholder="Password" type="password" aria-label="Password">
+            <input class="field" placeholder="Confirm Password" type="password" aria-label="Confirm Password">
+            <label class="check"><input type="checkbox"> <span>I confirm I am above the age of 16 years</span></label>
+            <label class="check"><input type="checkbox"> <span>I accept the terms and conditions</span></label>
+            <button class="btn btn-primary" data-next>Create profile</button>
+          </div>
+          <div class="divider">OR</div>
+          <div class="socials">
+            <div class="social">Continue with Google</div>
+            <div class="social">Continue with Apple</div>
+            <div class="social">Continue with Facebook</div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <article class="screen" data-step="intro">
+      <div class="screen-grid">
+        <div class="copy">
+          <p class="eyebrow">How it works</p>
+          <h1>Sound becomes a <span class="grad-text">starting map.</span></h1>
+          <p>Personic begins with reactions to selected musical examples, then blends in personality calibration, life context, and self-reported goals. The result is not a label. It is a practical map for how to work, connect, move, date, and use music more intentionally.</p>
+          <div class="info-list">
+            <div class="info-item"><span class="info-icon">01</span><p>Sound prompts capture instinctive preference: rhythm, texture, energy, tension, novelty, and emotional color.</p></div>
+            <div class="info-item"><span class="info-icon">02</span><p>Big Five calibration turns those reactions into five consumer-friendly channels: Exploration, Structure, Activation, Connection, and Emotional Sensitivity.</p></div>
+            <div class="info-item"><span class="info-icon">03</span><p>Your goals shape what happens next, so the report moves from self-insight into pointed recommendations.</p></div>
+          </div>
+          <div class="btns"><button class="btn btn-primary" data-next>Next</button></div>
+        </div>
+        <div class="visual music-visual" aria-hidden="true">
+          <div class="music-map">
+            <div class="music-node"><i></i><strong>Pulse</strong><span>Tempo, groove, movement, and forward drive.</span></div>
+            <div class="music-node"><i></i><strong>Texture</strong><span>Timbre, density, brightness, and sonic detail.</span></div>
+            <div class="music-node"><i></i><strong>Emotion</strong><span>Warmth, intensity, tension, release, and recovery.</span></div>
+            <div class="music-node"><i></i><strong>Novelty</strong><span>Complexity, surprise, familiarity, and pattern change.</span></div>
+          </div>
+          <div class="visual-caption"><strong>The sound layers</strong><span>Your reactions across these layers form the basis of your Acoustic Genome.</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="screen" data-step="audioIntro">
+      <div class="screen-grid">
+        <div class="copy">
+          <p class="eyebrow">Sound calibration</p>
+          <h2>Your reactions become the first layer of your Acoustic Genome.</h2>
+          <div class="info-list">
+            <div class="info-item"><span class="info-icon">01</span><p>You will hear 10 short musical examples. Headphones or speakers are recommended.</p></div>
+            <div class="info-item"><span class="info-icon">02</span><p>Each example is designed to vary by pulse, texture, novelty, intensity, and emotional tone.</p></div>
+            <div class="info-item"><span class="info-icon">03</span><p>Answer quickly. Your preference is useful even when you are not sure why you like or dislike something.</p></div>
+          </div>
+          <div class="btns"><button class="btn btn-ghost" data-prev>Back</button><button class="btn btn-primary" data-next>Next</button></div>
+        </div>
+        <div class="visual" aria-hidden="true">
+          <svg viewBox="0 0 420 420">
+            <defs><linearGradient id="waveGrad" x1="0" x2="1"><stop offset="0" stop-color="#01fff0"/><stop offset="1" stop-color="#ff2c9d"/></linearGradient></defs>
+            <path d="M38 218c28-22 36-64 66-22s44 72 74 0 44-92 76 0 42 72 76 0 40-24 52-18" fill="none" stroke="url(#waveGrad)" stroke-width="9" stroke-linecap="round"/>
+            <path d="M50 290h320" stroke="rgba(255,255,255,.14)" stroke-width="2"/>
+            <circle cx="210" cy="210" r="132" fill="none" stroke="rgba(255,255,255,.1)"/>
+          </svg>
+          <div class="visual-caption"><strong>Listen first</strong><span>The assessment starts before self-description enters the room.</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="screen" data-step="audioQuestion">
+      <div class="question">
+        <div class="audio-player">
+          <span class="time" id="audioTime">0:15 / 0:33</span>
+          <div class="wave" id="waveBars" aria-hidden="true"></div>
+          <button class="pause" aria-label="Pause">Ⅱ</button>
+        </div>
+        <p class="eyebrow" id="audioEyebrow">Audio excerpt 1 of 10</p>
+        <h2 id="audioTitle">How much do you like this music in general?</h2>
+        <p id="audioSub">Use your immediate reaction. There is no ideal listening taste in Personic.</p>
+        <div class="options likert-options" data-choice>
+          <button class="option">Dislike Extremely</button>
+          <button class="option">Dislike Very Much</button>
+          <button class="option">Dislike Moderately</button>
+          <button class="option">Dislike Slightly</button>
+          <button class="option">Neither like nor Dislike</button>
+          <button class="option">Like Slightly</button>
+          <button class="option">Like Moderately</button>
+          <button class="option">Like Very Much</button>
+          <button class="option">Like Extremely</button>
+        </div>
+        <div class="progress-row"><button class="btn btn-ghost" data-prev>Back</button><span class="progress-count" id="audioProgress">1 / 10</span><button class="btn btn-primary" data-next>Next</button></div>
+      </div>
+    </article>
+
+    <article class="screen" data-step="personalityIntro">
+      <div class="screen-grid">
+        <div class="copy">
+          <p class="eyebrow">Personality calibration</p>
+          <h2>Now we add self-description to the sound signal.</h2>
+          <div class="info-list">
+            <div class="info-item"><span class="info-icon">O</span><p>These items help estimate the five channels used in the report: Exploration, Structure, Activation, Connection, and Emotional Sensitivity.</p></div>
+            <div class="info-item"><span class="info-icon">C</span><p>Each prompt uses a short pair of traits. Choose the response that feels most true most of the time.</p></div>
+            <div class="info-item"><span class="info-icon">N</span><p>The report avoids good/bad trait language. Different profiles need different kinds of support.</p></div>
+          </div>
+          <div class="btns"><button class="btn btn-ghost" data-prev>Back</button><button class="btn btn-primary" data-next>Next</button></div>
+        </div>
+        <div class="visual" aria-hidden="true">
+          <svg viewBox="0 0 420 420">
+            <defs><linearGradient id="spiderGrad" x1="0" x2="1"><stop offset="0" stop-color="#7b4cff"/><stop offset=".55" stop-color="#ff2c9d"/><stop offset="1" stop-color="#9ffff0"/></linearGradient></defs>
+            <polygon points="210,58 354,162 299,330 121,330 66,162" fill="none" stroke="rgba(255,255,255,.18)"/>
+            <polygon points="210,104 308,176 271,292 149,292 112,176" fill="none" stroke="rgba(255,255,255,.14)"/>
+            <polygon points="210,78 292,177 265,282 132,288 98,176" fill="rgba(123,76,255,.28)" stroke="url(#spiderGrad)" stroke-width="7"/>
+          </svg>
+          <div class="visual-caption"><strong>Personality layer</strong><span>The sound signal is joined with self-description for richer context.</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="screen" data-step="adjectives">
+      <div class="question">
+        <p class="eyebrow" id="adjectiveEyebrow">Pair of traits 1 of 15</p>
+        <h2 id="adjectiveTitle">Sympathetic, warm</h2>
+        <p id="adjectiveSub">How well does this pair describe you in everyday life?</p>
+        <div class="options likert-options scale-7" data-choice>
+          <button class="option">Disagree Strongly</button>
+          <button class="option">Disagree Moderately</button>
+          <button class="option">Disagree a Little</button>
+          <button class="option">Neither agree nor disagree</button>
+          <button class="option">Agree a Little</button>
+          <button class="option">Agree Moderately</button>
+          <button class="option">Agree Strongly</button>
+        </div>
+        <div class="progress-row"><button class="btn btn-ghost" data-prev>Back</button><span class="progress-count" id="adjectiveProgress">1 / 15</span><button class="btn btn-primary" data-next>Next</button></div>
+      </div>
+    </article>
+
+    <article class="screen" data-step="lifestyleIntro">
+      <div class="screen-grid">
+        <div class="copy">
+          <p class="eyebrow">Life context</p>
+          <h2>Now we calibrate how recommendations should land.</h2>
+          <p>These questions help Personic understand satisfaction, momentum, support, and readiness. That matters because recommendations should feel usable, not generic.</p>
+          <div class="guide-grid">
+            <div class="guide-card" style="--gc:var(--violet)"><h3>Current state</h3><p>Where life feels close to the way you want it to be.</p></div>
+            <div class="guide-card" style="--gc:var(--cyan)"><h3>Energy pattern</h3><p>What helps you move without overloading your day.</p></div>
+            <div class="guide-card" style="--gc:var(--pink)"><h3>Support style</h3><p>Where accountability, social cues, or private structure can help.</p></div>
+          </div>
+          <div class="btns"><button class="btn btn-ghost" data-prev>Back</button><button class="btn btn-primary" data-next>Next</button></div>
+        </div>
+        <div class="visual" aria-hidden="true">
+          <svg viewBox="0 0 420 420">
+            <defs><linearGradient id="lifeGrad" x1="0" x2="1"><stop offset="0" stop-color="#9ffff0"/><stop offset="1" stop-color="#ff2c9d"/></linearGradient></defs>
+            <circle cx="210" cy="210" r="140" fill="none" stroke="rgba(255,255,255,.12)"/>
+            <path d="M82 244c46-54 76-70 128-18s86 34 128-28" fill="none" stroke="url(#lifeGrad)" stroke-width="9" stroke-linecap="round"/>
+            <circle cx="110" cy="244" r="14" fill="#9ffff0"/><circle cx="210" cy="226" r="14" fill="#ff2c9d"/><circle cx="314" cy="198" r="14" fill="#7b4cff"/>
+          </svg>
+          <div class="visual-caption"><strong>Calibration layer</strong><span>Context helps personalize the final Acoustic Genome.</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="screen" data-step="statement">
+      <div class="question">
+        <p class="eyebrow" id="statementEyebrow">Life context 1 of 11</p>
+        <h2 id="statementTitle">In most ways my life is close to my ideal.</h2>
+        <p id="statementSub">Choose the answer that best fits your current season, not your permanent identity.</p>
+        <div class="options likert-options scale-7" data-choice>
+          <button class="option">Disagree Strongly</button>
+          <button class="option">Disagree Moderately</button>
+          <button class="option">Disagree a Little</button>
+          <button class="option">Neither agree nor disagree</button>
+          <button class="option">Agree a Little</button>
+          <button class="option">Agree Moderately</button>
+          <button class="option">Agree Strongly</button>
+        </div>
+        <div class="progress-row"><button class="btn btn-ghost" data-prev>Back</button><span class="progress-count" id="statementProgress">1 / 11</span><button class="btn btn-primary" data-next>Next</button></div>
+      </div>
+    </article>
+
+    <article class="screen" data-step="age">
+      <div class="question">
+        <p class="eyebrow">Context</p>
+        <h2>What is your age?</h2>
+        <p>Age range helps tune language, benchmark responsibly, and avoid recommendations that assume the wrong life stage.</p>
+        <div class="select-card custom-select" data-select>
+          <button class="field select-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">Age</button>
+          <div class="select-menu" role="listbox">
+            <button class="select-option" type="button">16-17</button>
+            <button class="select-option" type="button">18-24</button>
+            <button class="select-option" type="button">25-34</button>
+            <button class="select-option" type="button">35-44</button>
+            <button class="select-option" type="button">45-54</button>
+            <button class="select-option" type="button">55+</button>
+          </div>
+        </div>
+        <div class="progress-row"><button class="btn btn-ghost" data-prev>Back</button><span class="progress-count">X / 31</span><button class="btn btn-primary" data-next>Next</button></div>
+      </div>
+    </article>
+
+    <article class="screen" data-step="sex">
+      <div class="question">
+        <p class="eyebrow">Context</p>
+        <h2>What is your sex?</h2>
+        <p>This is optional context for aggregate calibration. Your report should still feel useful if you prefer not to say.</p>
+        <div class="select-card custom-select" data-select>
+          <button class="field select-trigger" type="button" aria-haspopup="listbox" aria-expanded="false">Sex</button>
+          <div class="select-menu" role="listbox">
+            <button class="select-option" type="button">Female</button>
+            <button class="select-option" type="button">Male</button>
+            <button class="select-option" type="button">Intersex</button>
+            <button class="select-option" type="button">Prefer not to say</button>
+          </div>
+        </div>
+        <div class="progress-row"><button class="btn btn-ghost" data-prev>Back</button><span class="progress-count">X / 31</span><button class="btn btn-primary" data-next>Next</button></div>
+      </div>
+    </article>
+
+    <article class="screen" data-step="processing">
+      <div class="question processing" id="processingExperience">
+        <div class="cinema-scene" id="cinemaScene">
+          <p class="eyebrow cinema-eyebrow">Building your Soundtrack</p>
+          <div class="pentagon-wrap" id="sphereWrap">
+            <div class="penta-3d">
+            <svg class="genome-pentagon" id="genomeSphere" viewBox="0 0 512 512" role="img" aria-label="Acoustic Genome pentagon assembling">
+              <defs>
+                <clipPath id="pentaClip">
+                  <path d="M256 42 L465 193 L385 435 H127 L47 193 Z"/>
+                </clipPath>
+                <linearGradient id="facetG1" x1="205" y1="38" x2="405" y2="238" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#a997ff"/><stop offset="1" stop-color="#644cff"/>
+                </linearGradient>
+                <linearGradient id="facetG2" x1="440" y1="168" x2="282" y2="396" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#4d91ff"/><stop offset="1" stop-color="#22d1ff"/>
+                </linearGradient>
+                <linearGradient id="facetG3" x1="382" y1="418" x2="190" y2="266" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#17f3e6"/><stop offset="1" stop-color="#39e6a9"/>
+                </linearGradient>
+                <linearGradient id="facetG4" x1="128" y1="432" x2="247" y2="252" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#ff5fae"/><stop offset="1" stop-color="#d91e7f"/>
+                </linearGradient>
+                <linearGradient id="facetG5" x1="58" y1="188" x2="252" y2="270" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#ffc857"/><stop offset="1" stop-color="#ffaa18"/>
+                </linearGradient>
+                <linearGradient id="pentaGlass" x1="92" y1="76" x2="385" y2="396" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#fff" stop-opacity=".64"/>
+                  <stop offset=".44" stop-color="#fff" stop-opacity=".1"/>
+                  <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+                </linearGradient>
+                <linearGradient id="pentaDepth" x1="256" y1="98" x2="256" y2="456" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#050314" stop-opacity="0"/>
+                  <stop offset=".72" stop-color="#050314" stop-opacity=".28"/>
+                  <stop offset="1" stop-color="#010008" stop-opacity=".72"/>
+                </linearGradient>
+                <linearGradient id="pentaShine" x1="85" y1="110" x2="392" y2="290" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#fff" stop-opacity="0"/>
+                  <stop offset=".45" stop-color="#fff" stop-opacity=".46"/>
+                  <stop offset="1" stop-color="#fff" stop-opacity="0"/>
+                </linearGradient>
+                <linearGradient id="pentaRimGrad" x1="47" y1="42" x2="465" y2="435" gradientUnits="userSpaceOnUse">
+                  <stop stop-color="#fff" stop-opacity=".62"/>
+                  <stop offset=".22" stop-color="#8b6cff"/>
+                  <stop offset=".48" stop-color="#17f3e6"/>
+                  <stop offset=".74" stop-color="#ff5fae"/>
+                  <stop offset="1" stop-color="#ffc857"/>
+                </linearGradient>
+                <linearGradient id="pentaProgressGrad" x1="47" y1="42" x2="465" y2="435" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#8b6cff"/>
+                  <stop offset=".25" stop-color="#4d91ff"/>
+                  <stop offset=".5" stop-color="#17f3e6"/>
+                  <stop offset=".75" stop-color="#ff5fae"/>
+                  <stop offset="1" stop-color="#ffc857"/>
+                </linearGradient>
+                <radialGradient id="pentaCenter" cx="50%" cy="45%" r="62%">
+                  <stop offset="0" stop-color="rgba(255,255,255,.24)"/>
+                  <stop offset=".48" stop-color="rgba(13,10,35,.88)"/>
+                  <stop offset="1" stop-color="rgba(5,3,18,.98)"/>
+                </radialGradient>
+              </defs>
+              <path class="penta-shell" d="M256 42 L465 193 L385 435 H127 L47 193 Z"/>
+              <g class="gores" clip-path="url(#pentaClip)" stroke="rgba(255,255,255,.18)" stroke-width="1.15">
+                <polygon class="gore g1" points="256,42 465,193 256,264"/>
+                <polygon class="gore g2" points="465,193 385,435 256,264"/>
+                <polygon class="gore g3" points="385,435 127,435 256,264"/>
+                <polygon class="gore g4" points="127,435 47,193 256,264"/>
+                <polygon class="gore g5" points="47,193 256,42 256,264"/>
+              </g>
+              <path class="penta-depth" d="M256 42 L465 193 L385 435 H127 L47 193 Z" clip-path="url(#pentaClip)"/>
+              <path class="penta-glass" d="M76 190 C126 82 218 45 316 61 C287 104 274 151 285 206 C225 191 150 216 76 190 Z" clip-path="url(#pentaClip)"/>
+              <path class="penta-shine" d="M86 194 C166 122 276 89 406 158 L372 216 C254 166 168 184 75 246 Z" clip-path="url(#pentaClip)"/>
+              <g class="penta-grid" aria-hidden="true">
+                <polygon class="major" points="256,42 465,193 385,435 127,435 47,193"/>
+                <polygon points="256,104 400,208 345,374 167,374 112,208"/>
+                <polygon points="256,162 345,226 311,330 201,330 167,226"/>
+              </g>
+              <path class="penta-progress-ring" pathLength="100" d="M256 42 L465 193 L385 435 H127 L47 193 Z"/>
+              <path class="penta-progress-live" pathLength="100" d="M256 42 L465 193 L385 435 H127 L47 193 Z"/>
+              <path class="penta-rim" d="M256 42 L465 193 L385 435 H127 L47 193 Z"/>
+              <g class="penta-center" aria-hidden="true">
+                <circle class="penta-center-lens" cx="256" cy="264" r="76"/>
+                <circle class="penta-core-ring" cx="256" cy="264" r="91"/>
+                <text class="penta-percent-text" id="spherePct" x="256" y="253">0%</text>
+                <text class="penta-percent-label" x="256" y="306">complete</text>
+              </g>
+              <g class="penta-sparks" aria-hidden="true">
+                <circle class="penta-spark s1" cx="256" cy="42" r="3.8"/>
+                <circle class="penta-spark s2" cx="465" cy="193" r="3.8"/>
+                <circle class="penta-spark s3" cx="385" cy="435" r="3.8"/>
+                <circle class="penta-spark s4" cx="127" cy="435" r="3.8"/>
+                <circle class="penta-spark s5" cx="47" cy="193" r="3.8"/>
+              </g>
+            </svg>
+            </div>
+          </div>
+          <p class="processing-status" id="processingStatus">Warming up the sound lab...</p>
+          <div class="processing-step-card" id="processingSteps">
+            <span id="processingStepIndex">01</span>
+            <div>
+              <b id="processingStepTitle">Reading your music reactions</b>
+              <small id="processingStepDetail">Capturing the sound patterns your attention naturally moves toward.</small>
+            </div>
+          </div>
+          <button class="btn btn-primary cinema-continue" id="cinemaContinue" type="button">Reveal your results</button>
+        </div>
+      </div>
+    </article>
+
+    <article class="screen" data-step="goals">
+      <div class="copy" style="max-width:980px">
+        <p class="eyebrow">Choose your direction</p>
+        <h2>What do you want <span class="grad-text">Soundtrack</span> to help you practice?</h2>
+        <p>Select up to three goals. These do not ask you to choose an archetype. They tell Personic what kind of growth direction should be derived behind the scenes.</p>
+        <div class="goal-grid" data-goals>
+          <button class="goal" data-goal="achievement" style="--goal-color:var(--blue)"><h3>Achievement</h3><p>Turn intention into visible progress, finished work, and stronger follow-through.</p></button>
+          <button class="goal" data-goal="discipline" style="--goal-color:var(--blue)"><h3>Discipline</h3><p>Build routines, protect attention, and make consistency easier to repeat.</p></button>
+          <button class="goal" data-goal="health" style="--goal-color:var(--gold)"><h3>Health</h3><p>Support movement, recovery, energy, and the habits that make your body feel reliable.</p></button>
+          <button class="goal" data-goal="connection" style="--goal-color:var(--pink)"><h3>Connection</h3><p>Create warmer bonds, clearer repair, and more intentional friendship or partnership rhythms.</p></button>
+          <button class="goal" data-goal="confidence" style="--goal-color:var(--cyan)"><h3>Confidence</h3><p>Practice visibility, action, and steadier self-trust without forcing a fake persona.</p></button>
+          <button class="goal" data-goal="purpose" style="--goal-color:var(--violet)"><h3>Purpose</h3><p>Connect choices to meaning, contribution, and the future self you want to become.</p></button>
+          <button class="goal" data-goal="creativity" style="--goal-color:var(--violet)"><h3>Creativity</h3><p>Use novelty and imagination to make artifacts, experiments, and original work.</p></button>
+          <button class="goal" data-goal="balance" style="--goal-color:var(--green)"><h3>Balance</h3><p>Reduce overload, recover faster, and build steadier rhythms around ambition.</p></button>
+          <button class="goal" data-goal="adventure" style="--goal-color:var(--orange)"><h3>Adventure</h3><p>Add discovery, movement, and aliveness while keeping enough structure to integrate it.</p></button>
+        </div>
+        <div class="goal-limit"><span id="goalLimitCopy">Choose 1-3 goals. Personic will derive the practice direction from the combination.</span><span class="pill"><i></i><b id="goalCount">0 selected</b></span></div>
+        <div class="btns"><button class="btn btn-ghost" data-prev>Back</button><button class="btn btn-primary" data-next>Choose life areas</button></div>
+      </div>
+    </article>
+
+    <article class="screen" data-step="domains">
+      <div class="copy" style="max-width:1040px">
+        <p class="eyebrow">Apply it to life</p>
+        <h2>Where should your recommendations show up first?</h2>
+        <p>Domains do not change who you are. They decide where the same Acoustic Genome profile and Growth Direction become practical cards in the report. You can select all five.</p>
+        <div class="domain-grid" data-domains>
+          <button class="domain-card selected" data-domain="music" style="--domain-color:var(--cyan)">
+            <span class="domain-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M9 18V6l11-2v12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="18" r="3" stroke="currentColor" stroke-width="1.8"/><circle cx="17" cy="16" r="3" stroke="currentColor" stroke-width="1.8"/></svg></span>
+            <h3>Music</h3><p>Focus, recovery, confidence, movement, social energy, and living sound identity.</p><small>State-based cues</small>
+          </button>
+          <button class="domain-card selected" data-domain="work" style="--domain-color:var(--violet)">
+            <span class="domain-icon"><svg viewBox="0 0 24 24" fill="none"><rect x="3" y="7" width="18" height="13" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" stroke="currentColor" stroke-width="1.8"/></svg></span>
+            <h3>Work</h3><p>Focus rhythm, collaboration style, motivation triggers, and execution plan.</p><small>Productivity rhythm</small>
+          </button>
+          <button class="domain-card selected" data-domain="relationships" style="--domain-color:var(--pink)">
+            <span class="domain-icon"><svg viewBox="0 0 24 24" fill="none"><circle cx="8" cy="9" r="3" stroke="currentColor" stroke-width="1.8"/><circle cx="16" cy="9" r="3" stroke="currentColor" stroke-width="1.8"/><path d="M3 19c1-4 3.5-5 5-5M21 19c-1-4-3.5-5-5-5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span>
+            <h3>Relationships</h3><p>Communication style, repair language, reassurance needs, and belonging rituals.</p><small>Connection blueprint</small>
+          </button>
+          <button class="domain-card selected" data-domain="dating" style="--domain-color:var(--orange)">
+            <span class="domain-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M12 20s-7-4.4-7-9.5A3.5 3.5 0 0 1 12 8a3.5 3.5 0 0 1 7 2.5C19 15.6 12 20 12 20z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg></span>
+            <h3>Dating</h3><p>Pacing, environments, profile prompts, chemistry checks, and stability signals.</p><small>Dating cues</small>
+          </button>
+          <button class="domain-card selected" data-domain="health" style="--domain-color:var(--gold)">
+            <span class="domain-icon"><svg viewBox="0 0 24 24" fill="none"><path d="M3 12h4l2-5 3 10 2-5h7" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <h3>Health</h3><p>Movement format, adherence triggers, recovery guidance, and accountability style.</p><small>Body rhythm</small>
+          </button>
+        </div>
+        <div class="goal-limit"><span id="domainLimitCopy">All five domains are selected for the richest Premium Report preview.</span><span class="pill"><i></i><b id="domainCount">5 selected</b></span></div>
+        <div class="btns"><button class="btn btn-ghost" data-prev>Back</button><button class="btn btn-primary" data-next>Sound history options</button></div>
+      </div>
+    </article>
+
+    <article class="screen" data-step="spotify">
+      <div class="copy" style="max-width:1040px">
+        <p class="eyebrow">Optional sound history</p>
+        <h2>Amplify your genome with listening data.</h2>
+        <p>You do not need Spotify data to get your Snapshot or Premium Report. If you add it later, Personic can enrich the music section first and, when confidence is useful, add secondary cues to work, relationships, dating, and health.</p>
+        <div class="spotify-panel">
+          <div class="spotify-card">
+            <h3>Before automatic import exists</h3>
+            <p>Spotify currently requires users to request account data manually. The report should give clear steps, let users mark the request as sent, and keep the core recommendations available while they wait.</p>
+            <ol class="music-roadmap">
+              <li class="active"><span>1</span><div><b>Request data from Spotify</b><br>Use Spotify privacy settings to request your account export.</div></li>
+              <li><span>2</span><div><b>Come back when the ZIP arrives</b><br>Most users receive it a few days later.</div></li>
+              <li><span>3</span><div><b>Upload and validate</b><br>Personic reads listening history, library, playlists, taste profile, and Wrapped-style summaries when present.</div></li>
+              <li><span>4</span><div><b>Enrich recommendations</b><br>The dashboard adds evidence chips and confidence labels instead of exposing raw private listening details.</div></li>
+            </ol>
+          </div>
+          <div class="upload-zone" data-upload-zone>
+            <div>
+              <strong>Upload Spotify ZIP when ready</strong>
+              <span>Drag the export here or continue without it. Payment, address, and raw identifiers should never enter the insight warehouse.</span>
+              <div class="upload-actions">
+                <button class="btn btn-primary" type="button" data-upload-state="pending">I requested my data</button>
+                <button class="btn btn-ghost" type="button" data-upload-state="ready">Preview uploaded state</button>
+                <button class="btn btn-ghost" type="button" data-upload-state="none">Skip for now</button>
+              </div>
+              <p class="consent-note" id="spotifyStateCopy">Current state: core recommendations only. Spotify can be added later from the report.</p>
+            </div>
+          </div>
+        </div>
+        <div class="btns"><button class="btn btn-ghost" data-prev>Back</button><button class="btn btn-primary" data-next>Build my genome</button></div>
+      </div>
+    </article>
+
+    <article class="screen" data-step="packages">
+      <div class="copy" style="max-width:980px">
+        <p class="eyebrow">Your results are ready</p>
+        <h2>Open your Soundtrack reveal.</h2>
+        <p>Your Snapshot opens the first layer immediately. Premium turns the same result into a full goal-directed plan across the life areas you selected.</p>
+        <div class="preview-matrix">
+          <div class="mini-card"><b>Snapshot</b><small>Current archetype, palette, strongest signal, growth edge, and starter cards.</small></div>
+          <div class="mini-card"><b>Premium Report</b><small>Growth direction, full domain recommendations, saveable cards, and signs it is working.</small></div>
+          <div class="mini-card"><b>Spotify Enrichment</b><small>Optional listening-history layer for state-based music cues and evidence chips.</small></div>
+          <div class="mini-card"><b>Community</b><small>Similar-genome matches, shared actions, and blurred member previews.</small></div>
+        </div>
+        <div class="packages">
+          <article class="package">
+            <h3>Snapshot</h3>
+            <div class="row"><span>Opens now</span><span>Included</span></div>
+            <p class="package-note">The recognition layer: enough detail to feel seen and understand the result.</p>
+            <p class="list-label">Included</p>
+            <ul>
+              <li>Acoustic Genome palette visualization</li>
+              <li>Current Soundtrack Type and badge</li>
+              <li>Top five-channel readout</li>
+              <li>Strongest signal and growth edge</li>
+              <li>One concrete starter action per selected domain</li>
+              <li>Blurred previews of the full plan</li>
+              <li>Optional Spotify request roadmap</li>
+            </ul>
+            <div class="price">Open Snapshot<small>No growth archetype revealed here</small></div>
+            <button class="btn btn-cyan">View Snapshot</button>
+          </article>
+          <article class="package feature">
+            <h3 id="focusTitle">Premium Report</h3>
+            <div class="row"><span id="focusScope">5 selected domains</span><span>Recommended</span></div>
+            <p class="include-badge">Includes everything in Snapshot</p>
+            <p class="list-label">Unlocks for your goals</p>
+            <ul>
+              <li>Growth Direction and why it fits your selected goals</li>
+              <li>Current-to-growth route and what changes with your goals</li>
+              <li>Complete recommendations across selected life areas</li>
+              <li>Saveable cards for accountability and follow-through</li>
+              <li>Signs it is working and plain-language practice meters</li>
+              <li>Similar-genome community previews</li>
+            </ul>
+            <div class="price" id="focusPrice">$19.99<small>One-time report preview pricing</small></div>
+            <button class="btn btn-primary" id="focusButton">Unlock full report</button>
+          </article>
+          <article class="package">
+            <h3>Future Plus</h3>
+            <div class="row"><span>Adaptive loop</span><span>Coming next</span></div>
+            <p class="include-badge">Builds on Premium Report</p>
+            <p class="list-label">Subscription value</p>
+            <ul>
+              <li>Recommendation feedback loop</li>
+              <li>Saved-card streaks and completion check-ins</li>
+              <li>Updated sound identity as listening changes</li>
+              <li>More community matches and shared rituals</li>
+              <li>New domains and seasonal reports</li>
+              <li>Longitudinal Acoustic Genome updates</li>
+            </ul>
+            <div class="price">Waitlist<small>Designed for recurring value</small></div>
+            <button class="btn btn-ghost">Join Plus waitlist</button>
+          </article>
+        </div>
+        <p class="footer-note">Personic is a consumer personality and self-insight experience. It is not a medical or mental-health assessment and does not diagnose, treat, or screen for any condition.</p>
+      </div>
+    </article>
+    <div class="flow-footer" aria-label="Assessment progress">
+      <div class="flow-copy">
+        <span class="flow-count" id="flowCount">Step 1 of 13</span>
+        <span class="flow-label" id="flowLabel">Account</span>
+      </div>
+      <div class="flow-track"><div class="flow-fill" id="flowFill"></div></div>
+      <div class="flow-actions">
+        <button class="btn btn-ghost" id="flowBack" type="button">Back</button>
+        <button class="btn btn-primary" id="flowNext" type="button">Next</button>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="site-foot">© 2026 Personic Labs. All rights reserved. Soundtrack, Acoustic Genome, Wavelength, and Panel are trademarks or pending trademarks of Personic Labs.</footer>
+<div class="cinema-fade" id="cinemaFade" aria-hidden="true"></div>
+
+<script>
+const groups=[
+  ['account','Account'],
+  ['intro','Overview'],
+  ['audioIntro','Audio'],
+  ['audioQuestion','Audio rating'],
+  ['personalityIntro','Personality'],
+  ['adjectives','Adjectives'],
+  ['lifestyleIntro','Lifestyle'],
+  ['statement','Statement'],
+  ['age','Age'],
+  ['sex','Sex'],
+  ['goals','Goals'],
+  ['domains','Domains'],
+  ['spotify','Sound history'],
+  ['processing','Processing'],
+  ['packages','Results']
+];
+const screenByStep=new Map([...document.querySelectorAll('.screen')].map(screen=>[screen.dataset.step,screen]));
+const screens=groups.map(([key])=>screenByStep.get(key)).filter(Boolean);
+let current=0;
+const stage=document.querySelector('.stage');
+const flowFill=document.getElementById('flowFill');
+const flowCount=document.getElementById('flowCount');
+const flowLabel=document.getElementById('flowLabel');
+const flowBack=document.getElementById('flowBack');
+const flowNext=document.getElementById('flowNext');
+const focusScope=document.getElementById('focusScope');
+const focusPrice=document.getElementById('focusPrice');
+const focusButton=document.getElementById('focusButton');
+const processingExperience=document.getElementById('processingExperience');
+const processingStatus=document.getElementById('processingStatus');
+const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const cinemaFade=document.getElementById('cinemaFade');
+const sphereWrap=document.getElementById('sphereWrap');
+const spherePct=document.getElementById('spherePct');
+const pentaProgress=document.querySelector('.penta-progress-live');
+const gores=[...document.querySelectorAll('.gore')];
+const cinemaScene=document.getElementById('cinemaScene');
+const cinemaContinue=document.getElementById('cinemaContinue');
+const processingItems=[...document.querySelectorAll('#processingSteps .process-item')];
+const processingStepIndex=document.getElementById('processingStepIndex');
+const processingStepTitle=document.getElementById('processingStepTitle');
+const processingStepDetail=document.getElementById('processingStepDetail');
+const fullName=document.getElementById('fullName');
+const navPerson=document.getElementById('navPerson');
+const goalCount=document.getElementById('goalCount');
+const goalLimitCopy=document.getElementById('goalLimitCopy');
+const domainCount=document.getElementById('domainCount');
+const domainLimitCopy=document.getElementById('domainLimitCopy');
+const spotifyStateCopy=document.getElementById('spotifyStateCopy');
+let processingTimer=null;
+let transitionTimer=null;
+let processingComplete=false;
+let sphCur=0;
+let sphRaf=null;
+let sphTickTimer=null;
+let spotifyState='none';
+const repeatState={audio:0,adjectives:0,statement:0};
+const responses={audio:[],adjectives:[],statement:[]};
+const audioQuestions=[
+  {time:'0:15 / 0:33',title:'How much do you like this music in general?',sub:'Use your immediate reaction. There is no ideal listening taste in Personic.'},
+  {time:'0:11 / 0:29',title:'How naturally does this rhythm make you want to move?',sub:'Think about pulse, momentum, and whether the sound gives your body energy.'},
+  {time:'0:18 / 0:36',title:'How comfortable does this texture feel to listen to?',sub:'Notice density, brightness, smoothness, and whether the sound feels inviting or too busy.'},
+  {time:'0:12 / 0:31',title:'How emotionally familiar does this sound feel?',sub:'Choose based on the feeling it gives you, not whether you recognize the genre.'},
+  {time:'0:16 / 0:34',title:'How interesting is this musical pattern to your mind?',sub:'This helps estimate appetite for novelty, complexity, and surprise.'},
+  {time:'0:14 / 0:30',title:'How much would this help you focus?',sub:'Imagine using it before a work block, study session, or deep concentration period.'},
+  {time:'0:10 / 0:28',title:'How much would this help you recover?',sub:'Imagine using it after stress, conflict, exercise, or a demanding day.'},
+  {time:'0:17 / 0:37',title:'How social does this music feel?',sub:'Would it make sense with friends, a date, a gathering, or a shared ritual?'},
+  {time:'0:13 / 0:32',title:'How much confidence does this sound give you?',sub:'Listen for lift, boldness, steadiness, and whether it makes action feel easier.'},
+  {time:'0:19 / 0:38',title:'How much would you save or replay this?',sub:'Your replay instinct helps distinguish brief liking from useful sound anchors.'}
+];
+const adjectiveQuestions=[
+  {title:'Sympathetic, warm',sub:'How well does this pair describe you in everyday life?'},
+  {title:'Organized, systematic',sub:'Think about routines, follow-through, and how naturally you create order.'},
+  {title:'Curious, imaginative',sub:'Think about novelty, ideas, and your appetite for complex or unfamiliar patterns.'},
+  {title:'Energetic, enthusiastic',sub:'Think about activation, expressiveness, and how easily momentum arrives.'},
+  {title:'Calm, emotionally steady',sub:'Think about recovery, reactivity, and how quickly your system settles.'},
+  {title:'Direct, self-defining',sub:'Think about boundaries, independence, and your willingness to be clear.'},
+  {title:'Reliable, disciplined',sub:'Think about commitments, planning, and doing what you said you would do.'},
+  {title:'Inventive, pattern-seeking',sub:'Think about connecting ideas other people may not connect yet.'},
+  {title:'Sociable, expressive',sub:'Think about social energy, visibility, and being energized by others.'},
+  {title:'Sensitive, emotionally aware',sub:'Think about emotional detail, vigilance, and depth of feeling.'},
+  {title:'Cooperative, trusting',sub:'Think about warmth, support, and how naturally you assume good intent.'},
+  {title:'Flexible, spontaneous',sub:'Think about improvisation, openness to plans changing, and low rigidity.'},
+  {title:'Ambitious, achievement-oriented',sub:'Think about standards, outcomes, and wanting visible progress.'},
+  {title:'Reflective, meaning-oriented',sub:'Think about depth, purpose, and wanting decisions to feel connected to values.'},
+  {title:'Adventurous, novelty-seeking',sub:'Think about exploration, variety, and whether aliveness matters more than sameness.'}
+];
+const statementQuestions=[
+  {title:'In most ways my life is close to my ideal.',sub:'Choose the answer that best fits your current season, not your permanent identity.'},
+  {title:'I know what I want to make more consistent right now.',sub:'This helps route recommendations toward habit design or discovery.'},
+  {title:'I have people in my life who help me follow through.',sub:'This helps decide whether social accountability should appear in your plan.'},
+  {title:'I often know what would help me, but I do not always make it easy to start.',sub:'This helps separate insight from action support.'},
+  {title:'Music changes my focus, energy, or mood in noticeable ways.',sub:'This calibrates how central sound should be in your recommendations.'},
+  {title:'I want guidance that feels practical and specific.',sub:'This tunes the report toward concrete cards instead of abstract insight.'},
+  {title:'I am trying to improve how I show up with other people.',sub:'This informs social, dating, and community recommendations.'},
+  {title:'I want my work rhythm to feel more intentional.',sub:'This informs focus, collaboration, and achievement guidance.'},
+  {title:'I want movement and recovery to feel easier to repeat.',sub:'This informs health and exercise recommendations.'},
+  {title:'I am open to a report that challenges me gently.',sub:'This tunes the language around growth edge and Growth Direction.'},
+  {title:'I would use saveable action cards if they were clearly tied to my goals.',sub:'This helps route accountability features and subscription value.'}
+];
+const archetypePalettes=[
+  {name:'Resonant Connector',colors:['#01fff0','#38ccff','#7b4cff','#ff2c9d']},
+  {name:'Reflective Explorer',colors:['#7b4cff','#38ccff','#01fff0','#ffd15b']},
+  {name:'Kinetic Catalyst',colors:['#ff2c9d','#ffd15b','#01fff0','#7b4cff']},
+  {name:'Grounded Architect',colors:['#38ccff','#01fff0','#7b4cff','#b9ff75']},
+  {name:'Luminous Strategist',colors:['#ffd15b','#ff2c9d','#7b4cff','#01fff0']}
+];
+function applyArchetypePalette(){
+  if(!cinemaScene) return;
+  const selected=[
+    ...responses.audio,
+    ...responses.adjectives,
+    ...responses.statement,
+    ...[...document.querySelectorAll('[data-goals] .goal.selected')].map(el=>el.dataset.goal),
+    spotifyState
+  ].join('|') || 'acoustic-genome';
+  const seed=[...selected].reduce((sum,char)=>sum+char.charCodeAt(0),0);
+  const palette=archetypePalettes[seed%archetypePalettes.length];
+  palette.colors.forEach((color,idx)=>cinemaScene.style.setProperty(`--ag-c${idx+1}`,color));
+  cinemaScene.dataset.archetype=palette.name;
+}
+function lockGores(n){
+  gores.forEach((g,i)=>g.classList.toggle('locked',i<n));
+}
+function renderSphere(p){
+  const safe=Math.max(0,Math.min(100,p));
+  const f=safe/100;
+  if(spherePct) spherePct.textContent=`${Math.round(safe)}%`;
+  if(sphereWrap) sphereWrap.style.setProperty('--build-progress', safe.toFixed(1));
+  if(pentaProgress) pentaProgress.style.strokeDashoffset=(100-safe).toFixed(1);
+  const halo=document.querySelector('.sph-halo');
+  const rim=document.querySelector('.sph-rim');
+  if(halo) halo.style.opacity=(0.16+f*0.5).toFixed(2);
+  if(rim) rim.style.opacity=(0.45+f*0.55).toFixed(2);
+}
+function setSphere(target){
+  if(sphRaf) cancelAnimationFrame(sphRaf);
+  if(sphTickTimer) clearInterval(sphTickTimer);
+  sphRaf=null;
+  sphTickTimer=null;
+  sphCur=target;
+  renderSphere(target);
+  if(sphereWrap){
+    sphereWrap.classList.remove('count-pop');
+    void sphereWrap.offsetWidth;
+    sphereWrap.classList.add('count-pop');
+  }
+}
+function sealSphere(){
+  lockGores(5);
+  if(sphereWrap) sphereWrap.classList.add('sealed');
+  if(cinemaScene) cinemaScene.classList.add('is-done');
+}
+function resetSphere(){
+  if(sphRaf) cancelAnimationFrame(sphRaf);
+  if(sphTickTimer) clearInterval(sphTickTimer);
+  sphTickTimer=null;
+  sphCur=0;
+  renderSphere(0);
+  lockGores(0);
+  if(sphereWrap) sphereWrap.classList.remove('sealed');
+  if(cinemaScene) cinemaScene.classList.remove('is-done');
+}
+function selectedGoalCount(){
+  return document.querySelectorAll('[data-goals] .goal.selected').length;
+}
+function selectedDomainCount(){
+  return document.querySelectorAll('[data-domains] .domain-card.selected').length;
+}
+function updatePricing(){
+  const goals=selectedGoalCount();
+  const domains=Math.max(selectedDomainCount(),1);
+  const label=domains===1?'1 selected domain':`${domains} selected domains`;
+  if(goalCount) goalCount.textContent=goals===1?'1 selected':`${goals} selected`;
+  if(domainCount) domainCount.textContent=domains===1?'1 selected':`${domains} selected`;
+  if(focusScope) focusScope.textContent=label;
+  if(focusPrice) focusPrice.innerHTML='$19.99<small>One-time report preview pricing</small>';
+  if(focusButton) focusButton.textContent=domains===5?'Unlock full report':'Unlock selected report';
+  if(goalLimitCopy){
+    goalLimitCopy.textContent=goals===0
+      ? 'Choose 1-3 goals. Personic will derive the practice direction from the combination.'
+      : goals>=3
+        ? 'Three goals selected. This gives the mapping engine a clear direction without blurring the route.'
+        : 'Add another goal if it genuinely matters right now, or continue with a sharper signal.';
+  }
+  if(domainLimitCopy){
+    domainLimitCopy.textContent=domains===5
+      ? 'All five domains are selected for the richest Premium Report preview.'
+      : `Your report will prioritize ${label}. You can add the others later.`;
+  }
+}
+function pulseTransition(){
+  window.clearTimeout(transitionTimer);
+  stage.classList.remove('transitioning');
+  void stage.offsetWidth;
+  stage.classList.add('transitioning');
+  transitionTimer=window.setTimeout(()=>{
+    stage.classList.remove('transitioning');
+    transitionTimer=null;
+  },1280);
+}
+function resetProcessing(){
+  window.clearTimeout(processingTimer);
+  processingTimer=null;
+  processingComplete=false;
+  resetSphere();
+  processingStatus.textContent='Warming up the sound lab...';
+  if(processingStepIndex) processingStepIndex.textContent='01';
+  if(processingStepTitle) processingStepTitle.textContent='Reading your music reactions';
+  if(processingStepDetail) processingStepDetail.textContent='Capturing the sound patterns your attention naturally moves toward.';
+  processingItems.forEach(item=>item.classList.remove('active','done'));
+  processingExperience.classList.remove('active-run');
+}
+function startProcessing(){
+  resetProcessing();
+  applyArchetypePalette();
+  processingExperience.classList.add('active-run');
+  const frames=[
+    [8,'Tuning the room before we read the signal...',0,'Signal warmup','Preparing a clean read of your assessment data.'],
+    [24,'Reading your music reactions...',1,'Reading sound response','Capturing the patterns your attention naturally moves toward.'],
+    [44,'Estimating your five-channel palette...',2,'Building the five-channel palette','Translating sound response into Exploration, Structure, Activation, Connection, and Emotional Sensitivity.'],
+    [64,'Integrating personality calibration...',3,'Adding personality context','Blending self-description with the sound-first signal.'],
+    [84,'Mapping your goals to a practice direction...',4,'Mapping your Growth Direction','Using selected goals to derive the next practice route behind the scenes.'],
+    [100,'Your Soundtrack is ready.',5,'Preparing your reveal','Opening Snapshot first, with premium previews ready behind it.']
+  ];
+  let index=0;
+  const tick=()=>{
+    const [pct,msg,pieceCount,title,detail]=frames[index];
+    setSphere(pct);
+    lockGores(pieceCount);
+    processingStatus.textContent=msg;
+    if(processingStepIndex) processingStepIndex.textContent=String(Math.min(Math.max(pieceCount,1),5)).padStart(2,'0');
+    if(processingStepTitle) processingStepTitle.textContent=title;
+    if(processingStepDetail) processingStepDetail.textContent=detail;
+    processingItems.forEach((item,idx)=>{
+      item.classList.toggle('done',idx<pieceCount);
+      item.classList.toggle('active',idx===pieceCount && pct<100);
+      if(pct===100) item.classList.toggle('done',idx<=4);
+    });
+    if(pct===100){
+      processingComplete=true;
+      flowNext.disabled=false;
+      flowNext.textContent='Open results';
+      sealSphere();
+      return;
+    }
+    index+=1;
+    const delay=[900,1300,1350,1500,1550,1100][index-1] || 1200;
+    processingTimer=window.setTimeout(tick,delay);
+  };
+  processingTimer=window.setTimeout(tick,360);
+}
+function currentKey(){
+  return groups[current]?.[0] || 'account';
+}
+function repeatTypeForKey(key){
+  if(key==='audioQuestion') return 'audio';
+  if(key==='adjectives') return 'adjectives';
+  if(key==='statement') return 'statement';
+  return null;
+}
+function repeatList(type){
+  if(type==='audio') return audioQuestions;
+  if(type==='adjectives') return adjectiveQuestions;
+  return statementQuestions;
+}
+function clearChoices(screen){
+  screen?.querySelectorAll('[data-choice] .option').forEach(option=>option.classList.remove('selected'));
+}
+function restoreChoice(screen,type,index){
+  clearChoices(screen);
+  const choice=responses[type]?.[index];
+  if(choice==null) return;
+  const options=[...screen.querySelectorAll('[data-choice] .option')];
+  if(options[choice]) options[choice].classList.add('selected');
+}
+function selectedChoiceIndex(screen){
+  const options=[...screen.querySelectorAll('[data-choice] .option')];
+  return options.findIndex(option=>option.classList.contains('selected'));
+}
+function saveRepeatResponse(){
+  const type=repeatTypeForKey(currentKey());
+  if(!type) return;
+  const screen=screens[current];
+  const idx=selectedChoiceIndex(screen);
+  if(idx>=0) responses[type][repeatState[type]]=idx;
+}
+function renderRepeatScreen(key){
+  const type=repeatTypeForKey(key);
+  if(!type) return;
+  const list=repeatList(type);
+  const index=Math.max(0,Math.min(repeatState[type],list.length-1));
+  repeatState[type]=index;
+  const item=list[index];
+  const isAudio=type==='audio';
+  const titleId=isAudio?'audioTitle':type==='adjectives'?'adjectiveTitle':'statementTitle';
+  const subId=isAudio?'audioSub':type==='adjectives'?'adjectiveSub':'statementSub';
+  const eyebrowId=isAudio?'audioEyebrow':type==='adjectives'?'adjectiveEyebrow':'statementEyebrow';
+  const progressId=isAudio?'audioProgress':type==='adjectives'?'adjectiveProgress':'statementProgress';
+  const prefix=isAudio?'Audio excerpt':type==='adjectives'?'Pair of traits':'Life context';
+  const title=document.getElementById(titleId);
+  const sub=document.getElementById(subId);
+  const eyebrow=document.getElementById(eyebrowId);
+  const progress=document.getElementById(progressId);
+  if(title) title.textContent=item.title;
+  if(sub) sub.textContent=item.sub;
+  if(eyebrow) eyebrow.textContent=`${prefix} ${index+1} of ${list.length}`;
+  if(progress) progress.textContent=`${index+1} / ${list.length}`;
+  if(isAudio && item.time && document.getElementById('audioTime')) document.getElementById('audioTime').textContent=item.time;
+  if(isAudio) restartWave();
+  restoreChoice(screens[current],type,index);
+}
+function applyShow(i, animate=false){
+  current=Math.max(0,Math.min(i,screens.length-1));
+  screens.forEach((s,idx)=>s.classList.toggle('active',idx===current));
+  const key=currentKey();
+  document.body.classList.toggle('ag-cinema',key==='processing');
+  const progress=((current+1)/screens.length)*100;
+  flowFill.style.width=`${progress}%`;
+  flowCount.textContent=`Step ${current+1} of ${screens.length}`;
+  flowLabel.textContent=groups[current][1];
+  flowBack.hidden=current===0;
+  flowNext.hidden=current===screens.length-1;
+  flowNext.textContent=key==='account'?'Continue':key==='goals'?'Choose life areas':key==='domains'?'Sound history options':key==='spotify'?'Build my genome':key==='processing'?'Open results':'Next';
+  flowNext.disabled=key==='processing' && !processingComplete;
+  updatePricing();
+  renderRepeatScreen(key);
+  try{ if(location.hash.slice(1)!==key) history.replaceState(null,'',`#${key}`); }catch(e){}
+  if(animate) pulseTransition();
+  if(key==='processing') startProcessing();
+  else window.clearTimeout(processingTimer);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function show(i, animate=false){
+  const prev=current;
+  const target=Math.max(0,Math.min(i,screens.length-1));
+  const targetKey=groups[target]?.[0];
+  if(targetKey==='processing' && prev!==target && !reduceMotion && cinemaFade){
+    cinemaFade.classList.add('show');
+    window.setTimeout(()=>{
+      applyShow(target,false);
+      window.setTimeout(()=>cinemaFade.classList.remove('show'),360);
+    },280);
+    return;
+  }
+  applyShow(target,animate);
+}
+function nextStep(){
+  const key=currentKey();
+  const type=repeatTypeForKey(key);
+  if(type){
+    saveRepeatResponse();
+    const list=repeatList(type);
+    if(repeatState[type]<list.length-1){
+      repeatState[type]+=1;
+      renderRepeatScreen(key);
+      pulseTransition();
+      return;
+    }
+  }
+  show(current+1,true);
+}
+function prevStep(){
+  const key=currentKey();
+  const type=repeatTypeForKey(key);
+  if(type && repeatState[type]>0){
+    saveRepeatResponse();
+    repeatState[type]-=1;
+    renderRepeatScreen(key);
+    pulseTransition();
+    return;
+  }
+  show(current-1,true);
+}
+function stepFromHash(){
+  const key=location.hash.slice(1);
+  const idx=groups.findIndex(([id])=>id===key);
+  return idx>=0?idx:0;
+}
+window.addEventListener('hashchange',()=>show(stepFromHash(),true));
+if(cinemaContinue) cinemaContinue.addEventListener('click',()=>show(current+1,true));
+flowBack.addEventListener('click',prevStep);
+flowNext.addEventListener('click',nextStep);
+if(fullName){
+  const syncName=()=>{
+    const first=(fullName.value || 'Aneesh').trim().split(/\s+/)[0] || 'Aneesh';
+    if(navPerson) navPerson.textContent=first;
+  };
+  fullName.addEventListener('input',syncName);
+  syncName();
+}
+document.addEventListener('click',e=>{
+  const next=e.target.closest('[data-next]'), prev=e.target.closest('[data-prev]');
+  if(next) nextStep();
+  if(prev) prevStep();
+  const selectTrigger=e.target.closest('.select-trigger');
+  const selectOption=e.target.closest('.select-option');
+  if(selectTrigger){
+    const select=selectTrigger.closest('[data-select]');
+    document.querySelectorAll('[data-select].open').forEach(s=>{if(s!==select){s.classList.remove('open');s.querySelector('.select-trigger').setAttribute('aria-expanded','false')}});
+    select.classList.toggle('open');
+    selectTrigger.setAttribute('aria-expanded',select.classList.contains('open')?'true':'false');
+  }else if(selectOption){
+    const select=selectOption.closest('[data-select]');
+    const trigger=select.querySelector('.select-trigger');
+    select.querySelectorAll('.select-option').forEach(o=>o.classList.remove('selected'));
+    selectOption.classList.add('selected');
+    trigger.textContent=selectOption.textContent;
+    trigger.setAttribute('aria-expanded','false');
+    select.classList.remove('open');
+  }else{
+    document.querySelectorAll('[data-select].open').forEach(s=>{s.classList.remove('open');s.querySelector('.select-trigger').setAttribute('aria-expanded','false')});
+  }
+  const opt=e.target.closest('[data-choice] .option');
+  if(opt){
+    opt.parentElement.querySelectorAll('.option').forEach(o=>o.classList.remove('selected'));
+    opt.classList.add('selected');
+    saveRepeatResponse();
+  }
+  const goal=e.target.closest('[data-goals] .goal');
+  if(goal){
+    const selected=goal.classList.contains('selected');
+    if(!selected && selectedGoalCount()>=3){
+      if(goalLimitCopy) goalLimitCopy.textContent='Choose up to three goals so the report can keep a clear practice direction.';
+    }else{
+      goal.classList.toggle('selected');
+    }
+    updatePricing();
+  }
+  const domain=e.target.closest('[data-domains] .domain-card');
+  if(domain){
+    const selected=domain.classList.contains('selected');
+    if(selected && selectedDomainCount()<=1){
+      if(domainLimitCopy) domainLimitCopy.textContent='Keep at least one life area selected so the report has somewhere useful to apply your plan.';
+    }else{
+      domain.classList.toggle('selected');
+    }
+    updatePricing();
+  }
+  const upload=e.target.closest('[data-upload-state]');
+  if(upload){
+    spotifyState=upload.dataset.uploadState || 'none';
+    const copy={
+      none:'Current state: core recommendations only. Spotify can be added later from the report.',
+      pending:'Current state: request marked. Keep using the standard report while Spotify prepares the export.',
+      ready:'Current state: uploaded preview. The report can show listening-history evidence chips and richer music cues.'
+    };
+    if(spotifyStateCopy) spotifyStateCopy.textContent=copy[spotifyState] || copy.none;
+    document.querySelectorAll('[data-upload-state]').forEach(btn=>btn.classList.toggle('btn-primary',btn===upload));
+    document.querySelectorAll('[data-upload-state]').forEach(btn=>btn.classList.toggle('btn-ghost',btn!==upload));
+  }
+});
+const wave=document.getElementById('waveBars');
+function restartWave(){
+  if(!wave) return;
+  wave.classList.remove('playing');
+  void wave.offsetWidth;
+  requestAnimationFrame(()=>wave.classList.add('playing'));
+}
+if(wave){
+  const vals=[34,50,62,44,76,40,58,70,45,38,54,48,64,82,42,55,72,46,78,40,52,66,58,44,74,88,50,41,60,48,42,54,38,46,56,44,50,62,40,58,34,46,52,38,42];
+  wave.innerHTML=vals.map((v,i)=>`<i style="height:${v}px;--i:${i}"></i>`).join('');
+}
+show(stepFromHash());
+</script>
+</body>
+</html>

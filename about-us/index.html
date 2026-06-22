@@ -52,13 +52,15 @@
 .about-proof{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
 .about-proof .card{min-height:100%}
 .advisor-grid{display:grid;gap:18px;margin-top:42px}
-.advisor-card{position:relative;display:grid;grid-template-columns:auto 1fr auto;gap:22px;align-items:center;border:1px solid var(--line-2);border-radius:24px;padding:clamp(22px,3vw,30px);overflow:hidden;background:linear-gradient(135deg,rgba(255,255,255,.052),rgba(255,255,255,.018));box-shadow:0 32px 80px -58px rgba(0,0,0,.95)}
+.advisor-card{position:relative;display:grid;grid-template-columns:116px 1fr;gap:24px;align-items:start;border:1px solid var(--line-2);border-radius:24px;padding:clamp(22px,3vw,30px);overflow:hidden;background:linear-gradient(135deg,rgba(255,255,255,.052),rgba(255,255,255,.018));box-shadow:0 32px 80px -58px rgba(0,0,0,.95)}
 .advisor-card::before{content:"";position:absolute;inset:0;border-radius:24px;padding:1px;background:linear-gradient(120deg,rgba(123,76,255,.9),rgba(48,204,255,.72),rgba(84,230,192,.68));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:.38;pointer-events:none}
 .advisor-mark{width:74px;height:74px;border-radius:22px;display:grid;place-items:center;font-family:var(--mono);font-size:1rem;letter-spacing:.08em;color:#fff;background:radial-gradient(80% 80% at 24% 18%,rgba(255,255,255,.24),transparent 46%),var(--grad-btn);box-shadow:0 22px 46px -24px rgba(48,204,255,.75)}
+.advisor-photo{position:relative;z-index:1;width:116px;height:116px;border-radius:999px;padding:3px;background:var(--grad-spectrum);box-shadow:0 24px 54px -24px rgba(48,204,255,.72)}
+.advisor-photo img{display:block;width:100%;height:100%;border-radius:999px;object-fit:cover;border:1px solid rgba(255,255,255,.18);background:#110d1d;filter:saturate(1.04) contrast(1.04)}
+.advisor-copy{position:relative;z-index:1}
 .advisor-card h3{font-size:clamp(1.45rem,2.4vw,2.05rem);letter-spacing:-.026em;margin-top:8px}
 .advisor-role{color:var(--text);font-weight:600;margin-top:7px}
 .advisor-card p:not(.kicker):not(.advisor-role){color:var(--muted);font-size:.96rem;line-height:1.62;margin-top:10px;max-width:72ch}
-.advisor-link{position:relative;z-index:1;white-space:nowrap;border:1px solid var(--line-2);border-radius:999px;padding:.8em 1em;color:var(--text);background:rgba(255,255,255,.045);font-weight:700;font-size:.88rem}
 .research-list{margin-top:36px;border-top:1px solid var(--line)}
 .research-item{display:grid;grid-template-columns:1fr auto;gap:20px;padding:24px 2px;border-bottom:1px solid var(--line);align-items:center}
 .research-item .journal{font-family:var(--mono);font-size:.66rem;letter-spacing:.13em;text-transform:uppercase;color:var(--faint)}
@@ -70,8 +72,8 @@
 .press-logo img{max-height:36px;width:auto;opacity:.72;filter:grayscale(1) brightness(0) invert(1)}
 .mission-strip{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:42px}
 .mission-strip .panel{min-height:100%}
-@media(max-width:920px){.about-metrics,.about-proof,.press-grid{grid-template-columns:repeat(2,1fr)}.founder-bio,.mission-strip{grid-template-columns:1fr}.founder-column{position:relative;top:auto}.science-card{min-height:auto}.about-signal-visual.reveal-x{--x:0px!important}.advisor-card{grid-template-columns:auto 1fr}.advisor-link{grid-column:2}}
-@media(max-width:560px){.about-metrics,.about-proof,.press-grid{grid-template-columns:1fr}.about-readout{position:relative;left:auto;bottom:auto;width:auto;margin:-18px 18px 18px}.founder-caption{padding-top:8px}.science-orbit{min-height:230px}.science-card{padding:24px}.advisor-card{grid-template-columns:1fr}.advisor-mark{width:64px;height:64px}.advisor-link{grid-column:auto;width:max-content}}
+@media(max-width:920px){.about-metrics,.about-proof,.press-grid{grid-template-columns:repeat(2,1fr)}.founder-bio,.mission-strip{grid-template-columns:1fr}.founder-column{position:relative;top:auto}.science-card{min-height:auto}.about-signal-visual.reveal-x{--x:0px!important}.advisor-card{grid-template-columns:96px 1fr}.advisor-photo{width:96px;height:96px}}
+@media(max-width:560px){.about-metrics,.about-proof,.press-grid{grid-template-columns:1fr}.about-readout{position:relative;left:auto;bottom:auto;width:auto;margin:-18px 18px 18px}.founder-caption{padding-top:8px}.science-orbit{min-height:230px}.science-card{padding:24px}.advisor-card{grid-template-columns:1fr}.advisor-mark{width:64px;height:64px}.advisor-photo{width:98px;height:98px}}
 </style>
 
 </head>
@@ -87,8 +89,8 @@
 <header class="ihero"><div class="wrap ihero-grid">
 <div class="reveal">
 <p class="eyebrow">Founded on music science</p>
-<h1 style="margin-top:16px">Built by the scientist helping prove that <span class="spectral-text">music reveals who we are.</span></h1>
-<p class="lede">Personic Labs turns instinctive reactions to sound into clearer self-understanding, practical growth guidance, and more meaningful connection. The work is shaped by Dr. David M. Greenberg's research across personality psychology, social neuroscience, music therapy, and data science.</p>
+<h1 style="margin-top:16px">Built by scientists helping prove that <span class="spectral-text">music reveals who we are.</span></h1>
+<p class="lede">Personic Labs turns instinctive reactions to sound into clearer self-understanding, practical growth guidance, and more meaningful connection. The work is shaped by our founders' research across personality psychology, social neuroscience, music therapy, and data science.</p>
 <div class="proof">
 <span style="--accent:var(--violet)">Cambridge PhD</span>
 <span style="--accent:var(--cyan)">Spotify personality algorithms</span>
@@ -174,18 +176,37 @@
 </div></section>
 
 <section class="sec" style="padding-top:0"><div class="wrap">
-<div class="sec-head reveal"><p class="eyebrow">Scientific advisors</p><h2>Guided by leaders in personality, music preference, and human behavior.</h2><p>Personic's scientific network brings together researchers who study how personality shows up in the choices people make, the music they prefer, and the environments they seek.</p></div>
+<div class="sec-head reveal"><p class="eyebrow">Scientific advisors</p><h2>Guided by leaders in medicine, personality, music therapy, and human behavior.</h2><p>Personic's scientific network brings together experts who understand how sound, psychology, health, and everyday behavior can be translated into guidance people can actually use.</p></div>
 <div class="advisor-grid reveal" style="--d:80ms">
 <article class="advisor-card">
-<div class="advisor-mark" aria-hidden="true">JR</div>
-<div>
-<p class="kicker">Scientific Advisor</p>
-<h3>Dr. Jason Rentfrow</h3>
+<div class="advisor-photo"><img src="../assets/img/advisor-cuthbert-simpkins.png" alt="Cuthbert Simpkins" loading="lazy" decoding="async"></div>
+<div class="advisor-copy">
+<p class="kicker">Advisor, Biotech & Medicine</p>
+<h3>Dr. Cuthbert O. Simpkins, MD, FACS</h3>
+<p class="advisor-role">Founder and President, Vivacelle Bio; trauma surgeon and scientist</p>
+<p>Dr. Simpkins brings a clinical and biotechnology lens to Personic's wellbeing roadmap. He is the inventor and founder behind Vivacelle Bio's nanoparticle-based critical care therapies, has served as the Sosland Missouri Endowed Chair in Trauma Services at UMKC School of Medicine, and graduated from Harvard Medical School.</p>
+<div class="founder-tags"><span>Biotech</span><span>Critical care</span><span>Clinical rigor</span></div>
+</div>
+</article>
+<article class="advisor-card">
+<div class="advisor-photo"><img src="../assets/img/advisor-jason-rentfrow.png" alt="Jason Rentfrow" loading="lazy" decoding="async"></div>
+<div class="advisor-copy">
+<p class="kicker">Advisor, Psychology</p>
+<h3>Prof. Jason Rentfrow, PhD</h3>
 <p class="advisor-role">Professor of Personality and Individual Differences, University of Cambridge</p>
-<p>Dr. Rentfrow studies person-environment interactions, including how personality is expressed through music preferences and the places people choose to live. His work strengthens the bridge between sound, personality, and real-world behavior.</p>
+<p>Prof. Rentfrow studies person-environment interactions, including how personality is expressed through music preferences, places, and everyday choices. His work helps Personic translate sound-based reactions into credible personality insight and real-world guidance.</p>
 <div class="founder-tags"><span>Personality</span><span>Music preference</span><span>Person-environment fit</span></div>
 </div>
-<a class="advisor-link" href="https://www.psd.psychol.cam.ac.uk/team-members/dr-jason-rentfrow-pi" target="_blank" rel="noopener">Cambridge profile <span aria-hidden="true">&rarr;</span></a>
+</article>
+<article class="advisor-card">
+<div class="advisor-photo"><img src="../assets/img/advisor-jennifer-buchanan.png" alt="Jennifer Buchanan" loading="lazy" decoding="async"></div>
+<div class="advisor-copy">
+<p class="kicker">Advisor, Music Therapy</p>
+<h3>Jennifer Buchanan</h3>
+<p class="advisor-role">Certified Music Therapist; Founder and President, JB Music Therapy</p>
+<p>Jennifer Buchanan brings more than three decades of music therapy, workplace wellbeing, and health communication experience. Her team delivers over 20,000 music therapy sessions each year across medical, education, and wellness settings, helping Personic keep its sound-based recommendations human, practical, and ethically grounded.</p>
+<div class="founder-tags"><span>Music therapy</span><span>Wellbeing</span><span>Connection</span></div>
+</div>
 </article>
 </div>
 </div></section>
